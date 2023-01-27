@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template, menu)">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>Players</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<header>
+			<div class="playersTitle">
+			
+				<p th:text="Players"></p>
+			
+			</div>
+			
+			<div class="navigation">
+				<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
+				<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
+				<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
+				<a href="" id ="style-2" data-replace="Logout"><span>Logout</span></a>
+			</div>
+		
+	</header>
+	
+	<a href="/players/addPlayer" class="button-49">Add Random</a>
+	
+	<a href="/players/addPlayer" class="button-49">Add Player</a>
+
+	<table class="playerListTable">
+	
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		
+			<tr th:each="tempPlayer : ${players}">
+				<td th:text="${tempPlayer.id}"/>
+				<td th:text="${tempPlayer.firstName}"/>
+				<td th:text="${tempPlayer.lastName}"/>
+			
+				<td>
+					<a th:href="@{/players/updatePlayer(playerId=${tempPlayer.id})}"
+					class="button-49">
+					Update
+					</a>
+				
+					<a th:href="@{/players/deletePlayer(playerId=${tempPlayer.id})}"
+					class="button-49">
+					Delete
+					</a>
+				</td>
+			</tr>
+			
+		</tbody>
+	
+	
+	</table>
+
+
+</body>
+
+
+</html>

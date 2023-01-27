@@ -36,6 +36,7 @@ public class LoginController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		user.setCurrency(100);
 		
 		userRepository.save(user);
 		

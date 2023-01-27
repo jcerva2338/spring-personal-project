@@ -1,14 +1,23 @@
 package johncervantes.springproject.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
+
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +35,21 @@ public class User {
 	@Column(name = "team")
 	private String team;
 	
+	@Column(name = "currency")
+	private int currency;
+	
+	@OneToMany(fetch=FetchType.LAZY,
+			   mappedBy= "user",
+			   cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Player> players;
+	
 	public User() {}
 
-	public User(int id, String username, String password, String email, String team) {
-		this.id = id;
+	public User(String username, String password, String email, int currency, String team) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.currency = currency;
 		this.team = team;
 	}
 
@@ -74,6 +91,30 @@ public class User {
 
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	public int getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(int currency) {
+		this.currency = currency;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+	
+	public void addPlayer(Player player) {
+		if (this.players == null) {
+			this.players = new ArrayList<>();
+		}
+		
+		this.players.add(player);
 	}
 	
 	

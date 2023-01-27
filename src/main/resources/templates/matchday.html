@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 
-
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template, menu)">
-
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8"/>
-  <title>Home Page</title>
-  <link rel="stylesheet" th:href="@{/style.css}"/>
+	<meta charset="UTF-8"/>
+	<title>Initializing Stage...</title>
+	<link rel="stylesheet" th:href="@{/style.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+
 </head>
-
-
 
 <body>
 
@@ -32,20 +29,12 @@
 	
 	</header>
 	
-	<a href="/home/addPlayer" class="button">Addplayer</a>
+	<div class="playOptions">
+		<a href="/matchday/predictOutcome" id="style-2">Play Match</a>
+	</div>
+
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </html>

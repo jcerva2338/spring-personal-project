@@ -1,10 +1,12 @@
 package johncervantes.springproject.auth;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import johncervantes.springproject.entity.Player;
 import johncervantes.springproject.entity.User;
 
 public class CustomUserDetails implements UserDetails {
@@ -35,6 +37,14 @@ public class CustomUserDetails implements UserDetails {
 	
 	public String getTeam() {
 		return user.getTeam();
+	}
+	
+	public List<Player> getPlayers() {
+		return user.getPlayers();
+	}
+	
+	public int getId() {
+		return user.getId();
 	}
 
 	@Override
