@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8"/>
+  <title>Analyzing Player Profile...</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+		
+		<div class="playersTitle">
+			<p th:text="'Player ID' + ${player.id} + ' // ' + ${player.firstName} + ' ' + ${player.lastName}"></p>
+		</div>
+		
+		<div class="navigation">
+			<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
+			<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
+			<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
+			<a href="" id ="style-2" data-replace="Logout"><span>Logout</span></a>
+		</div>
+		
+</header>
+
+	<div class="playerVisual">
+		<img class="imgHair" alt="images/2-hair.png" src="/images/2-hair.png">
+		<img class="imgBody" alt="/images/1-body.png" src="/images/1-body.png">
+	</div>
+</body>
+
+
+</html>

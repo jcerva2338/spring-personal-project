@@ -53,6 +53,11 @@
 				<td th:text="${tempPlayer.lastName}"/>
 			
 				<td>
+					<a th:href="@{/players/aboutPlayer(playerId=${tempPlayer.id})}"
+					class="button-49">
+					About
+					</a>
+					
 					<a th:href="@{/players/updatePlayer(playerId=${tempPlayer.id})}"
 					class="button-49">
 					Update

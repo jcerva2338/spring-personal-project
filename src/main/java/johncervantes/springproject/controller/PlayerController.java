@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import johncervantes.springproject.auth.CustomUserDetails;
+import johncervantes.springproject.auth.CustomUserDetailsService;
 import johncervantes.springproject.entity.Player;
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.PlayerRepository;
@@ -104,5 +105,17 @@ public class PlayerController {
 			playerRepository.deleteById(playerId);
 		}
 		return "redirect:/players";
+	}
+	
+	@GetMapping("/aboutPlayer")
+	public String aboutPlayer(@RequestParam("playerId") int playerId, Model theModel) {
+		auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			Player player = playerRepository.getById(playerId);
+			
+			theModel.addAttribute("player", player);
+		}
+		
+		return "player-profile";
 	}
 }
