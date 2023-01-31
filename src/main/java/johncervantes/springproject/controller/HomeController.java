@@ -34,8 +34,7 @@ public class HomeController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
-			System.out.println(details.getTeam());
-			theModel.addAttribute("team", new String(details.getTeam()));
+			theModel.addAttribute("user", userRepository.getById(details.getId()));
 		}
 		
 		return "home";

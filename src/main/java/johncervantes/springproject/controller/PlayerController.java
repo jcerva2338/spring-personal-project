@@ -1,6 +1,7 @@
 package johncervantes.springproject.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -87,7 +88,14 @@ public class PlayerController {
 			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
 			User user = userRepository.findByEmail(details.getEmail());
 			
+			Random random = new Random();
+			
+			final int NUM_HEADS_AVAILABLE = 2;
+			final int NUM_BODYS_AVAILABLE = 1;
+			
 			if (player.getId() == 0) {
+				player.setHead(random.nextInt(1, NUM_HEADS_AVAILABLE+1));
+				player.setBody(random.nextInt(1, NUM_BODYS_AVAILABLE+1));
 				user.addPlayer(player);
 			}
 			

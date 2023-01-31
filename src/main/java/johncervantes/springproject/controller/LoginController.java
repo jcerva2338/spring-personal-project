@@ -17,6 +17,11 @@ import johncervantes.springproject.repository.UserRepository;
 @Controller
 public class LoginController {
 	
+	// isAuthenticated():
+	//
+	// Utilize the security context to check whether the current user is authenticated, if so, return true
+	// and otherwise return false.
+	//
 	private boolean isAuthenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -32,11 +37,13 @@ public class LoginController {
 	
 	@GetMapping("")
 	public String l() {
+		// Call helper function to check if the current user is logged in, if so, redirect
+		// to home page
 		if (isAuthenticated()) {
 			return "redirect:/home";
 		}
 		
-		return "fancy-login";
+		return "fancy-login"; // Otherwise the user is not authenticated and has to log in
 	}
 	
 	@GetMapping("/register")

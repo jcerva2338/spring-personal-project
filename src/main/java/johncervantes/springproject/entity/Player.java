@@ -23,9 +23,16 @@ public class Player {
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@Column(name = "head_id")
+	private int head;
+	
+	@Column(name = "body_id")
+	private int body;
+	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "user_id")
 	private User user;
+	
 	
 	public Player() {
 		
@@ -66,6 +73,22 @@ public class Player {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getHead() {
+		return head;
+	}
+
+	public void setHead(int head) {
+		this.head = head;
+	}
+
+	public int getBody() {
+		return body;
+	}
+
+	public void setBody(int body) {
+		this.body = body;
 	}
 
 	@Override
