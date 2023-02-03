@@ -6,18 +6,16 @@
 	<meta charset="UTF-8"/>
 	<title>Initializing Stage...</title>
 	<link rel="stylesheet" th:href="@{/style.css}"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
-
+  	<link rel="preconnect" href="https://fonts.googleapis.com">
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+  	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 	<header>
-		<div class="teamInfo">
-			<p th:text="${user.team} + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + ${user.currency}" >
-		</div>
+		
 		<div class="navigation">
 			<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
 			<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
@@ -29,9 +27,40 @@
 	
 	</header>
 	
-	<div class="playOptions">
-		<a href="/matchday/predictOutcome" id="style-2">Play Match</a>
+	<div class="prompt-user-lineup">
+		<h1>Select your 3 player lineup</h1>
 	</div>
+	<div class="lineup-select" style="width:350px">
+		<select class="form-control" id="playerSelectionList1" required="required">
+			<option value="0">Select Player #1</option>
+			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
+		</select>
+		<select class="form-control" id="playerSelectionList2" required="required">
+			<option value="0">Select Player #2</option>
+			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
+		</select>
+		<select class="form-control" id="playerSelectionList3" required="required">
+			<option value="0">Select Player #3</option>
+			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
+		</select>
+	</div>	
+	
+	<div class="playOptions">
+		<a href="#" id="style-2" onclick="submitPlayers()">Play Match</a>
+	</div>
+	
+	<script type="text/javascript">
+		function submitPlayers() {
+			const url = new URL('http://localhost:8080/matchday/matchResults');
+			url.searchParams.append("playerOne", document.getElementById("playerSelectionList1").value);
+			url.searchParams.append("playerTwo", document.getElementById("playerSelectionList2").value);
+			url.searchParams.append("playerThree", document.getElementById("playerSelectionList3").value);
+			
+			window.location = url;
+			
+			document.getElementById("playerSelectionList1").submit();
+		}
+	</script>
 
 
 </body>

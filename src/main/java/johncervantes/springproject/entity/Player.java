@@ -29,6 +29,9 @@ public class Player {
 	@Column(name = "body_id")
 	private int body;
 	
+	@Column(name = "goals")
+	private int goals;
+	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -89,6 +92,14 @@ public class Player {
 
 	public void setBody(int body) {
 		this.body = body;
+	}
+
+	public int getGoals() {
+		return goals;
+	}
+
+	public void setGoals(int goals) {
+		this.goals = goals;
 	}
 
 	@Override

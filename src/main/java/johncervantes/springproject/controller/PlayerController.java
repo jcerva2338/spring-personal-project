@@ -96,6 +96,7 @@ public class PlayerController {
 			if (player.getId() == 0) {
 				player.setHead(random.nextInt(1, NUM_HEADS_AVAILABLE+1));
 				player.setBody(random.nextInt(1, NUM_BODYS_AVAILABLE+1));
+				
 				user.addPlayer(player);
 			}
 			
