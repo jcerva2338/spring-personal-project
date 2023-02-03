@@ -217,10 +217,24 @@ a {
 
 .playOptions a{
 	position:absolute;
-	top: 25%;
-	left: 45%;
+	transform: translate(-50%, -50%);
+	top: 40%;
+	left: 50%;
 	font-size: 25px;
-	color: cobalt;
+	color: white;
+	
+	background-color: #2e79f2;
+	text-align: center;
+	padding: 20px 34px;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 25px;
+}
+
+.playOptions:hover {
+	transition: all 0.3s ease-in-out;
+	opacity: 0.9;
 }
 
 .playerVisual {
@@ -314,7 +328,7 @@ select option {
 h1  {
 	position: absolute;
 	left: 50%;
-	top: 100px;
+	top: 150px;
 	transform: translate(-50%, -50%);
 
 	font-family: 'Allerta Stencil', sans-serif;
@@ -334,11 +348,58 @@ h1:hover {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: red;
+	color: #2e79f2;
+	
 	font-size: 200px;
+	font-family: 'Allerta Stencil', sans-serif;
 }
+
 recap hr {
 	position: absolute;
+}
+
+.returnToMatchday a{
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top:  70%;
+	left: 50%;
+	font-size: 20px;
+	font-family: 'Allerta Stencil', sans-serif;
+	color: white;
+}
+
+.button {
+	background-color: #2e79f2;
+	text-align: center;
+	padding: 20px 34px;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 25px;
+}
+
+.scorerTable {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top: 30%;
+	left: 50%;
+	
+	width: 50%;
+	
+	font-size: 40px;
+	font-family: 'Allerta Stencil', sans-serif;
+}
+
+.scorerTable td {
+	color: #2e79f2;
+}
+.scorerTable td:hover {
+	color: blue;
+}
+
+.button:hover {
+	transition: all 0.3s ease-in-out;
+	opacity: 0.9;
 }
 
 

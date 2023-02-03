@@ -16,6 +16,10 @@
 
 	<header>
 		
+		<div class="teamInfo">
+			<p th:text="${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + ${user.currency}" >
+		</div>
+		
 		<div class="navigation">
 			<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
 			<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
@@ -28,7 +32,7 @@
 	</header>
 	
 	<div class="prompt-user-lineup">
-		<h1>Select your 3 player lineup</h1>
+			<h1>Select your 3 player lineup</h1>
 	</div>
 	<div class="lineup-select" style="width:350px">
 		<select class="form-control" id="playerSelectionList1" required="required">

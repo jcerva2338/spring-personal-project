@@ -1,5 +1,6 @@
 package johncervantes.springproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,6 +36,8 @@ public class MatchDayController {
 	
 	private int oppScore;
 	
+	List<String> scorers = new ArrayList<>();
+	
 	@GetMapping("")
 	public String showMatchMenu(Model theModel) {
 		auth = SecurityContextHolder.getContext().getAuthentication();
@@ -57,7 +59,8 @@ public class MatchDayController {
 	
 	@GetMapping("matchResults")
 	public String matchResults(@RequestParam("playerOne") int playerOne, @RequestParam("playerOne") int playerTwo,
-			   @RequestParam("playerThree") int playerThree) {
+			   @RequestParam("playerThree") int playerThree, Model theModel) {
+		scorers.clear();
 		Random rand = new Random();
 		
 		userScore = rand.nextInt(0, 5);
@@ -101,6 +104,9 @@ public class MatchDayController {
 					int whoScored = rand.nextInt(1, 4);
 					Player player = playerRepository.getById(whoScored);
 					
+					// Add player to the score sheet to be printed in recap
+					scorers.add(player.getFirstName() + " " + player.getLastName());
+					
 					switch (whoScored) {
 					case 1:
 						player.setGoals(player.getGoals()+playerScored);
@@ -130,6 +136,7 @@ public class MatchDayController {
 	public String showResult(Model theModel) {
 		theModel.addAttribute("userscore", userScore);
 		theModel.addAttribute("oppscore", oppScore);
+		theModel.addAttribute("scorers", scorers);
 		
 		return "match-recap";
 	}

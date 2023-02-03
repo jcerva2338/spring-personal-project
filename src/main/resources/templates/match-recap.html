@@ -6,7 +6,11 @@
 	<meta charset="UTF-8"/>
 	<title>Match Results</title>
   	<link rel="stylesheet" th:href="@{/style.css}"/>
-
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" th:href="@{/style.css}"/>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -14,6 +18,30 @@
 	<div class="recap">
 		<p th:text="${userscore} + ' - ' + ${oppscore}"></p>
 		<hr>
+	</div>
+	
+	<table class="scorerTable">
+	
+		<thead>
+			<tr>
+				<th>Team Scorers</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		
+			<tr th:each="tempScorer : ${scorers}">
+				<td th:text="${tempScorer}"/>
+			</tr>
+			
+		</tbody>
+	
+	
+	</table>
+	
+	
+	<div class="returnToMatchday">
+		<a th:href="@{/matchday}" class="button">Click to return</a>
 	</div>
 	
 
