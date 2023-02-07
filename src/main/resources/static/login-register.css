@@ -1,0 +1,37 @@
+h1 {
+	font-family: 'Allerta Stencil', sans-serif;
+	font-size: 50px;
+	text-align: center;
+	color: #2e79f2;
+}
+
+.option {
+	background-color: #2e79f2;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Allerta Stencil', sans-serif;
+	font-stretch: inherited;
+	padding: 20px 34px;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 25px;
+	border-style: inset;
+	margin-top: 50px;
+	
+	color: white;
+	position: relative;
+	transform: translate(-50%, -50%);
+
+}
+
+.option:hover {
+	transition: all 0.3s ease-in-out;
+	opacity: 0.9;
+}
+
+.user-options {
+	position: absolute;
+	padding-top: 30px;
+	left: 50%;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template, menu)">
+
+<head>
+
+	<meta charset="UTF-8"/>
+	<title>Player Database</title>
+	<link rel="stylesheet" th:href="@{/style.css}"/>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<div class="teamInfo">
+			<p th:text="'Team // &emsp;' +  ${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + 'Currency // &emsp;' + ${user.currency}" >
+		</div>
+		<div class="navigation">
+			<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
+			<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
+			<a href="/matchday" id ="style-2" data-replace="Let's start!"><span>Match-Day</span></a>
+			<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
+			<a href="/database" id ="style-2" data-replace="Player Database"><span>Player Database</span></a>
+			<a href="" id ="style-2" data-replace="Logout"><span>Logout</span></a>
+		
+		</div>
+	
+	</header>
+	
+	<table class="playerListTable">
+	
+		<thead>
+			<tr>
+				<td onclick="addSortMethod('id')" class="table-col">ID</td>
+				<th>Team</th>
+				<td onclick="addSortMethod('firstName')" class="table-col">First Name</td>
+				<td onclick="addSortMethod('lastName')" class="table-col">Last Name</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+		
+			<tr th:each="tempPlayer : ${players}">
+				<td th:text="${tempPlayer.id}"/>
+				<td th:text="${tempPlayer.user.getTeam()}"/>
+				<td th:text="${tempPlayer.firstName}"/>
+				<td th:text="${tempPlayer.lastName}"/>
+			</tr>
+			
+		</tbody>
+	
+	
+	</table>
+
+	<script type="text/javascript">
+		function addSortMethod(method) {
+			const url = new URL("http://localhost:8080/database");
+			url.searchParams.append("sortBy", method);
+			window.location = url;
+		}
+	</script>
+	
+</body>
+</html>

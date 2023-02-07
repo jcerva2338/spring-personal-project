@@ -4,8 +4,14 @@
 	<meta charset="ISO-8859-1">
 	<title>Welcome to project home</title>
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/login-register.css}" />
 	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+
 </head>
 
 
@@ -13,12 +19,11 @@
 	<div class="container text-center">
 		<h1>Welcome to Blue Lock</h1>
 		<hr>
-		<h3><a th:href="@{/login}">Login</a></h3>
-		<h3><a th:href="@{/register}">Register</a></h3>
+	</div>	
 	
-	
-	
-	
+	<div class="user-options">
+		<h3><a th:href="@{/login}" class="option">Login</a></h3>
+		<h3><a th:href="@{/register}" class="option">Register</a></h3>
 	</div>
 
 
