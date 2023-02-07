@@ -1,6 +1,7 @@
 package johncervantes.springproject.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -101,8 +102,13 @@ public class MatchDayController {
 				tempScore -= playerScored;
 				
 				if (playerScored > 0) {
+					HashMap<Integer, Integer> playerIndexMap = new HashMap<>();
+					playerIndexMap.put(1, playerOne);
+					playerIndexMap.put(2, playerTwo);
+					playerIndexMap.put(3, playerThree);
+					
 					int whoScored = rand.nextInt(1, 4);
-					Player player = playerRepository.getById(whoScored);
+					Player player = playerRepository.getById(playerIndexMap.get(whoScored));
 					
 					// Add player to the score sheet to be printed in recap
 					scorers.add(player.getFirstName() + " " + player.getLastName());

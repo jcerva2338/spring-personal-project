@@ -7,6 +7,7 @@
   <meta charset="UTF-8"/>
   <title>Players</title>
   <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link rel="stylesheet" th:href="@{/alert-error.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -21,6 +22,11 @@
 			
 			</div>
 			
+			<div class = "alert" id="error" hidden="true">
+				Error: Insufficient currency to recruit new player!
+				<span class="closebtn" id="close" onclick="this.parentElement.style.opacity=0;">&times;</span>	
+			</div>
+			
 			<div class="navigation">
 				<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
 				<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
@@ -32,9 +38,11 @@
 		
 	</header>
 	
-	<a href="/players/addPlayer" class="button-49">Add Random</a>
+	<span id="currency" th:text="${user.getCurrency()}" hidden="true"></span>
 	
-	<a href="/players/addPlayer" class="button-49">Add Player</a>
+	<a href="/players/addPlayer" class="button-49" onclick="">Add Random</a>
+	
+	<a href="#" class="button-49" onclick="validateCurrency()">Add Player</a>
 
 	<table class="playerListTable">
 	
@@ -76,8 +84,26 @@
 	
 	
 	</table>
-
-
+	
+	<script type="text/javascript">
+	function validateCurrency() {
+		const curr = document.getElementById("currency").innerHTML;
+		var error = document.getElementById("error");
+		var closeBtn = document.getElementById("close");
+		
+		if (+curr > 300) {
+			const url = new URL('http://localhost:8080/players/addPlayer');
+			console.log("hello");
+			window.location = url;
+		}
+		else {
+			console.log(+curr);
+			closeBtn.parentElement.hidden = false;
+			closeBtn.parentElement.style.opacity = "100";
+			closeBtn.parentElement.style.display = "initial";
+		}
+	}
+	</script>
 </body>
 
 

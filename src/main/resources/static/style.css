@@ -422,13 +422,40 @@ recap hr {
 .news-box {
 	position: absolute;
 	transform: translate(-50%, -50%);
-	background-color: blue;
 	top: 25%;
 	left: 25%;
+	
+	border-style: groove;
+	border-color: gray;
+	border-radius: 8px;
+	padding-left: 15px;
+	padding-right: 25px;
+	
+	max-height:500px;
+	max-width:600px;
+	width: 600px;
 }
-.headline {
-	color: black;
-	background-color:green;
+
+.news-headline {
+	font-family: 'Allerta Stencil', sans-serif;
+	color: gray;
 	position: relative;
+	text-decoration: underline;
+}
+
+.news-description {
+	font-family: 'Allerta Stencil', sans-serif;
+	border-style: dashed;
+	border-radius: 1px;
+	width: inherit;
+	max-width:inherit;
+	max-height:200px;
+	overflow: auto;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+.ext-link {
+	color: blue;
 }
 

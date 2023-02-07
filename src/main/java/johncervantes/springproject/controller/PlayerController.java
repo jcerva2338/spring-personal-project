@@ -44,6 +44,7 @@ public class PlayerController {
 		
 			List<Player> players = playerRepository.findAllByUserId(details.getId());
 		
+			theModel.addAttribute("user", userRepository.getById(details.getId()));
 			theModel.addAttribute("players", players);
 		}
 		
@@ -70,13 +71,17 @@ public class PlayerController {
 //		if (!(auth instanceof AnonymousAuthenticationToken)) {
 //			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
 //			User user = userRepository.findByEmail(details.getEmail());
+//			user.setCurrency(user.getCurrency() - 300);
 //			
-//			Player player = new Player("Ok", "Ok");
-//			
-//			user.addPlayer(player);
-//			
-//			playerRepository.save(player);
+//			userRepository.save(user);
+////			
+////			Player player = new Player("Ok", "Ok");
+////			
+////			user.addPlayer(player);
+////			
+////			playerRepository.save(player);
 //		}
+//		
 		
 		return "add-update-player";
 	}
@@ -96,6 +101,7 @@ public class PlayerController {
 			if (player.getId() == 0) {
 				player.setHead(random.nextInt(1, NUM_HEADS_AVAILABLE+1));
 				player.setBody(random.nextInt(1, NUM_BODYS_AVAILABLE+1));
+				user.setCurrency(user.getCurrency() - 300);
 				
 				user.addPlayer(player);
 			}

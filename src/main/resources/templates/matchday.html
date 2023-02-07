@@ -55,6 +55,11 @@
 	<script type="text/javascript">
 		function submitPlayers() {
 			const url = new URL('http://localhost:8080/matchday/matchResults');
+			
+			console.log(document.getElementById("playerSelectionList1").value);
+			console.log(document.getElementById("playerSelectionList2").value);
+			console.log(document.getElementById("playerSelectionList3").value);
+			
 			url.searchParams.append("playerOne", document.getElementById("playerSelectionList1").value);
 			url.searchParams.append("playerTwo", document.getElementById("playerSelectionList2").value);
 			url.searchParams.append("playerThree", document.getElementById("playerSelectionList3").value);
