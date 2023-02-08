@@ -11,19 +11,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 	<header>
-			<div class="playersTitle">
-			
-				<p th:text="Players"></p>
-			
+			<div class="teamInfo">
+				<p th:text="'Team // &emsp;' +  ${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + 'Currency // &emsp;' + ${user.currency}" >
 			</div>
 			
 			<div class = "alert" id="error" hidden="true">
-				Error: Insufficient currency to recruit new player!
+				
+				<span id = "errorMessage" >Error: Insufficient currency to recruit new player!</span>
 				<span class="closebtn" id="close" onclick="this.parentElement.style.opacity=0;">&times;</span>	
 			</div>
 			
@@ -39,6 +39,7 @@
 	</header>
 	
 	<span id="currency" th:text="${user.getCurrency()}" hidden="true"></span>
+	<span id="numPlayers" th:text="${players.size()}" hidden="true"></span>
 	
 	<a href="/players/addPlayer" class="button-49" onclick="">Add Random</a>
 	
@@ -73,8 +74,8 @@
 					Update
 					</a>
 				
-					<a th:href="@{/players/deletePlayer(playerId=${tempPlayer.id})}"
-					class="button-49">
+					<a th:href="'#'"
+					class="button-49" th:id="${tempPlayer.id}" onclick="validateDelete(this.id)">
 					Delete
 					</a>
 				</td>
@@ -90,6 +91,7 @@
 		const curr = document.getElementById("currency").innerHTML;
 		var error = document.getElementById("error");
 		var closeBtn = document.getElementById("close");
+		var errorMessage = document.getElementById("errorMessage");
 		
 		if (+curr > 300) {
 			const url = new URL('http://localhost:8080/players/addPlayer');
@@ -98,11 +100,37 @@
 		}
 		else {
 			console.log(+curr);
+			errorMessage.innerHTML = "Error: Insufficient currency to recruit new player!";
 			closeBtn.parentElement.hidden = false;
 			closeBtn.parentElement.style.opacity = "100";
 			closeBtn.parentElement.style.display = "initial";
 		}
 	}
+	</script>
+	
+	<script type="text/javascript">
+	
+	function validateDelete(btnId) {
+		const numPlayers = document.getElementById("numPlayers").innerHTML;
+		var closeBtn = document.getElementById("close");
+		var errorMessage = document.getElementById("errorMessage");
+		
+		if (numPlayers-1 < 3) {
+			console.log("Unable to delete: " + btnId);
+			errorMessage.innerHTML = "Error: Unable to delete (Min Players: 3)";
+			closeBtn.parentElement.hidden = false;
+			closeBtn.parentElement.style.opacity = "100";
+			closeBtn.parentElement.style.display = "initial";
+			
+		}
+		else {
+			console.log("Able to delete: " + btnId);
+			const url = new URL('http://localhost:8080/players/deletePlayer');
+			url.searchParams.append("playerId", btnId);
+			window.location = url;
+		}
+	}
+	
 	</script>
 </body>
 
