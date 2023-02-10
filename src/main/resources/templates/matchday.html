@@ -6,6 +6,7 @@
 	<meta charset="UTF-8"/>
 	<title>Initializing Stage...</title>
 	<link rel="stylesheet" th:href="@{/style.css}"/>
+	<link rel="stylesheet" th:href="@{/alert-error.css}"/>
   	<link rel="preconnect" href="https://fonts.googleapis.com">
   	<link rel="preconnect" href="https://fonts.gstatic.com">
   	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -15,9 +16,18 @@
 <body>
 
 	<header>
+		<div class="logoBox">
+			<img alt="" src="/images/logo.png">
+			<span class="logoText">SIMULATOR</span>
+		</div>
 		
 		<div class="teamInfo">
 			<p th:text="'Team // &emsp;' +  ${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + 'Currency // &emsp;' + ${user.currency}" >
+		</div>
+		
+		<div class = "alert" id="error" hidden="true">
+			<span id = "errorMessage" >Error: Insufficient currency to recruit new player!</span>
+			<span class="closebtn" id="close" onclick="this.parentElement.style.opacity=0;">&times;</span>	
 		</div>
 		
 		<div class="navigation">
@@ -34,16 +44,16 @@
 	<h1 class="prompt-user-lineup-text">Select your 3 player lineup</h1>
 	
 	<div class="lineup-select" style="width:350px">
-		<select class="form-control" id="playerSelectionList1" required="required">
-			<option value="0">Select Player #1</option>
+		<select style="height:40px;" class="form-control" id="playerSelectionList1" required="required">
+			<option value="-1">Select Player #1</option>
 			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
 		</select>
-		<select class="form-control" id="playerSelectionList2" required="required">
-			<option value="0">Select Player #2</option>
+		<select style="height:40px;" class="form-control" id="playerSelectionList2" required="required">
+			<option value="-1">Select Player #2</option>
 			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
 		</select>
-		<select class="form-control" id="playerSelectionList3" required="required">
-			<option value="0">Select Player #3</option>
+		<select style="height:40px;" class="form-control" id="playerSelectionList3" required="required">
+			<option value="-1">Select Player #3</option>
 			<option th:each="player : ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
 		</select>
 	</div>	
@@ -55,18 +65,37 @@
 	<script type="text/javascript">
 		function submitPlayers() {
 			const url = new URL('http://localhost:8080/matchday/matchResults');
+			const seenIds = new Set();
 			
-			console.log(document.getElementById("playerSelectionList1").value);
-			console.log(document.getElementById("playerSelectionList2").value);
-			console.log(document.getElementById("playerSelectionList3").value);
+			var closeBtn = document.getElementById("close");
+			var errorMessage = document.getElementById("errorMessage");
 			
-			url.searchParams.append("playerOne", document.getElementById("playerSelectionList1").value);
-			url.searchParams.append("playerTwo", document.getElementById("playerSelectionList2").value);
-			url.searchParams.append("playerThree", document.getElementById("playerSelectionList3").value);
+			var p1Id = document.getElementById("playerSelectionList1").value;
+			var p2Id = document.getElementById("playerSelectionList2").value;
+			var p3Id = document.getElementById("playerSelectionList3").value;
 			
-			window.location = url;
+			seenIds.add(p1Id).add(p2Id).add(p3Id);
 			
-			document.getElementById("playerSelectionList1").submit();
+			if (seenIds.has("-1") || seenIds.size < 3) {
+				errorMessage.innerHTML = "Error: Invalid or duplicate selection of players.";
+				closeBtn.parentElement.hidden = false;
+				closeBtn.parentElement.style.opacity = "100";
+				closeBtn.parentElement.style.display = "initial";
+			}
+			else {
+			
+				console.log(document.getElementById("playerSelectionList1").value);
+				console.log(document.getElementById("playerSelectionList2").value);
+				console.log(document.getElementById("playerSelectionList3").value);
+				
+				url.searchParams.append("playerOne", document.getElementById("playerSelectionList1").value);
+				url.searchParams.append("playerTwo", document.getElementById("playerSelectionList2").value);
+				url.searchParams.append("playerThree", document.getElementById("playerSelectionList3").value);
+				
+				window.location = url;
+				
+				document.getElementById("playerSelectionList1").submit();
+			}
 		}
 	</script>
 
