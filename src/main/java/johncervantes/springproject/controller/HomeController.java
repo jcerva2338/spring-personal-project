@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import johncervantes.springproject.auth.CustomUserDetails;
 import johncervantes.springproject.entity.Player;
+import johncervantes.springproject.entity.PlayerStats;
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.PlayerRepository;
 import johncervantes.springproject.repository.UserRepository;
@@ -47,7 +48,9 @@ public class HomeController {
 			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
 			User user = userRepository.findByEmail(details.getEmail());
 			
-			Player player = new Player("Ok", "Ok");
+			Player player = new Player("Ok", "Ok", new PlayerStats());
+			
+			player.getPlayerStats().setPlayer(player);
 			
 			user.addPlayer(player);
 			

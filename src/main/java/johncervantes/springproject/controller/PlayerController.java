@@ -1,5 +1,6 @@
 package johncervantes.springproject.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import johncervantes.springproject.auth.CustomUserDetails;
 import johncervantes.springproject.auth.CustomUserDetailsService;
 import johncervantes.springproject.entity.Player;
+import johncervantes.springproject.entity.PlayerStats;
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.PlayerRepository;
 import johncervantes.springproject.repository.UserRepository;
@@ -64,6 +66,8 @@ public class PlayerController {
 	@GetMapping("/addPlayer")
 	public String addPlayer(Model theModel) {
 		Player tempPlayer = new Player();
+		tempPlayer.setPlayerStats(new PlayerStats());
+		tempPlayer.getPlayerStats().setPlayer(tempPlayer);
 		
 		theModel.addAttribute("player", tempPlayer);
 		
@@ -101,6 +105,8 @@ public class PlayerController {
 			if (player.getId() == 0) {
 				player.setHead(random.nextInt(1, NUM_HEADS_AVAILABLE+1));
 				player.setBody(random.nextInt(1, NUM_BODYS_AVAILABLE+1));
+				player.setPlayerStats(new PlayerStats(player));
+				player.getPlayerStats().setGoals(0);
 				user.setCurrency(user.getCurrency() - 300);
 				
 				user.addPlayer(player);
@@ -129,6 +135,15 @@ public class PlayerController {
 			Player player = playerRepository.getById(playerId);
 			
 			theModel.addAttribute("player", player);
+			try {
+				player.getPlayerStats().deserializeDailyGoalMap();
+				player.getPlayerStats().serializeDailyGoalMap();
+				System.out.println("hi");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			theModel.addAttribute("data", player.getPlayerStats().getDailyGoalMapJSON());
 		}
 		
 		return "player-profile";

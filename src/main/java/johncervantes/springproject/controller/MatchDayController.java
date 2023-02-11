@@ -1,8 +1,10 @@
 package johncervantes.springproject.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import johncervantes.springproject.auth.CustomUserDetails;
 import johncervantes.springproject.entity.Player;
+import johncervantes.springproject.entity.PlayerStats;
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.PlayerRepository;
 import johncervantes.springproject.repository.UserRepository;
@@ -113,22 +118,53 @@ public class MatchDayController {
 					// Add player to the score sheet to be printed in recap
 					scorers.add(player.getFirstName() + " " + player.getLastName());
 					
+					PlayerStats playerStats = player.getPlayerStats();
+					HashMap<String, Integer> goalMap;
+					
+					if (playerStats.getDailyGoalMapJSON() == null) {
+						playerStats.setDailyGoalMap(new HashMap<>());
+						goalMap = playerStats.getDailyGoalMap();
+					}
+					else {
+						try {
+							playerStats.deserializeDailyGoalMap();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						goalMap = playerStats.getDailyGoalMap();
+					}
+					
 					switch (whoScored) {
 					case 1:
-						player.setGoals(player.getGoals()+playerScored);
+						player.getPlayerStats().setGoals(player.getPlayerStats().getGoals()+playerScored);
 						System.out.println("p1 scored " + playerScored);
 						break;
 					case 2:
-						player.setGoals(player.getGoals()+playerScored);
+						player.getPlayerStats().setGoals(player.getPlayerStats().getGoals()+playerScored);
 						System.out.println("p2 scored " + playerScored);
 						break;
 					case 3:
-						player.setGoals(player.getGoals()+playerScored);
+						player.getPlayerStats().setGoals(player.getPlayerStats().getGoals()+playerScored);
 						System.out.println("p3 scored " + playerScored);
 						break;
 					default:
 						break;
 					}
+					
+					String date = java.time.LocalDate.now().toString();
+					
+					goalMap.put(date, goalMap.getOrDefault(date, 0) + playerScored);
+					
+					try {
+						playerStats.serializeDailyGoalMap();
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					System.out.println("Player " + player.getId() + " scored total: " + goalMap.get(date));
+					playerRepository.save(player);
 				}
 			}
 			

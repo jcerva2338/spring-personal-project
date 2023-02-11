@@ -5,6 +5,8 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Home</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
   <link rel="stylesheet" th:href="@{/style.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,6 +38,7 @@
 	</header>
 	
 	<span id="span_id" th:text="${player.head}" hidden="true"></span>
+	<span id="json_data" th:text="${data}"></span>
 
 	<div class="playerTitle">
 		
@@ -61,7 +64,7 @@
 			<tbody>
 				<tr>
 					<th th:text="${player.id}"></th>
-					<th th:text="${player.goals}"></th>
+					<th th:text="${player.playerStats.getGoals()}"></th>
 				</tr>
 				
 			</tbody>
@@ -72,6 +75,17 @@
 	<script type="text/javascript">
 		function init() {document.getElementById("hair").src="/images/" + document.getElementById("span_id").innerHTML + "-hair.png"};
 	  	window.onload = init;
+	</script>
+	
+	<script>
+		window.onload = function () {
+			var jsonData = JSON.parse(document.getElementById("json_data").innerHTML);
+			
+			var res = $.each($.parseJSON(jsonData), function(k, v) {
+				alert(k + v);
+			});
+			
+		}
 	</script>
 </body>
 
