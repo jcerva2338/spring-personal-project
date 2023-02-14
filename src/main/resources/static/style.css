@@ -72,7 +72,7 @@ table{
 .teamInfo {
 	width:auto;
 	margin-right:auto;
-	font-size:30px;
+	font-size:25px;
 	font-stretch: ultra-expanded;
 	font-family: 'Allerta Stencil', sans-serif;
 	text-decoration: blink;
@@ -533,14 +533,18 @@ recap hr {
 
 .news-description {
 	font-family: 'Allerta Stencil', sans-serif;
-	border-style: dashed;
-	border-radius: 1px;
+	color: #c9c9c9;
 	width: inherit;
-	max-width:inherit;
+	padding-top: 50px;
+	padding-left: 50px;
+	max-width:400px;
 	max-height:200px;
-	overflow: auto;
-	padding-top: 5px;
-	padding-left: 5px;
+	overflow: visible;
+
+	
+	transition: transform 0.5s, width 0.5s, height 0.5s;
+	
+	visibility: hidden;
 }
 
 .ext-link {
@@ -559,6 +563,9 @@ recap hr {
 }
 
 .popup {
+	padding-top: 50px;
+	padding-left: 50px;
+	float: left;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -567,9 +574,10 @@ recap hr {
 
 .popupBox {
 	position: relative;
-	height: 120px;
-	width: 120px;
-	background: gray;
+	height: 150px;
+	width: 150px;
+	background: white;
+	border: 3px solid #F9F4F4;
 	border-radius: 70px;
 	cursor: pointer;
 	display: flex;
@@ -582,35 +590,61 @@ recap hr {
 	position: absolute;
 	text-align: center;
 	color:white;
+	font-family: 'Allerta Stencil', sans-serif;
 	font-size: 3em;
-	font-weight: 200;
+	font-weight: 500;
+	-webkit-text-stroke: 1.5px #537EBA;
 	
 	transition: 1.0s;
 }
 
-.popupBox.active::before {
-	color: lime;
+.popupBox.active{
+	opacity: 0.5;
+	border: 3px solid #537EBA;
+	transition: 1.0s;
 }
 
 .popupText {
 	position: absolute;
-	width: 30px;
-	height: 30px;
-	background: blue;
+	width: 100px;
+	height: 100px;
+	background: white;
 	border-radius: 70px;
+	border: 3px solid #537EBA;
 	z-index: -2;
 	
 	transition: transform 0.5s, width 0.5s, height 0.5s;
-	transition-delay: 0.5s, 0.5s, 0.5s;
+
 	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .popupBox.active ~ .popupText {
-	width: 240px;
-	height: 70px;
+	top: 100px;
+	width: 700px;
+	max-width: 700px;
+	height: 400px;
+	max-height: 400px;
+	
 	z-index: 1;
+	visibility: visible;
 
-	transform: translateY(-100px);
+	transform: translateX(500px);
 	transition-delay: 0s, 0.5s, 0.5s;
+}
+
+.news-description.active {
+	font-family: 'Allerta Stencil', sans-serif;
+	width: 600px;
+	max-width: 600px;
+	overflow: visible;
+	padding-top: 50px;
+	padding-left: 30px;
+	padding-right: 30px;
+	visibility: visible;
+	
+	transition: transform 0.5s, width 0.5s, height 0.5s;
+	transition-property: all;
+	transition-delay: 0.5s, 0.5s, 0.5s;
+	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 

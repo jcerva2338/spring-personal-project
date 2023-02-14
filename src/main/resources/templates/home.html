@@ -39,34 +39,53 @@
 	</header>
 	
 	<div class="popup">
-		<div class="popupBox">
-		
+		<div class="popupBox" id="popup1">
+			
 		</div>
 		
 		<div class="popupText">
-		
+			<h3 class="news-description" id="news1">The following project was inspired by the Japanese television 
+			show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
+			This project draws inspiration from Blue Lock and applies it throughout the design of the pages
+			and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
+			to earn currency to then sign more players and build their teams, attempting to have the best team.
+			
+			<br><br>
+			Find out more about Blue Lock here:
+			
+			<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
+			
+			<br><br>
+			 
+			</h3>
 		</div>
+		
+		
 	</div>
 	
-	
-	<div class="news-box">
-	
-		<h1 class="news-headline">About Project</h1>
-		<h3 class="news-description">The following project was inspired by the Japanese television 
-		show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
-		This project draws inspiration from Blue Lock and applies it throughout the design of the pages
-		and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
-		to earn currency to then sign more players and build their teams, attempting to have the best team.
+	<div class="popup">
+		<div class="popupBox" id="popup2" >
+			
+		</div>
 		
-		<br><br>
-		Find out more about Blue Lock here:
+		<div class="popupText">
+			<h3 class="news-description" id="news2">The following project was inspired by the Japanese television 
+			show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
+			This project draws inspiration from Blue Lock and applies it throughout the design of the pages
+			and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
+			to earn currency to then sign more players and build their teams, attempting to have the best team.
+			
+			<br><br>
+			Find out more about Blue Lock here:
+			
+			<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
+			
+			<br><br>
+			 
+			</h3>
+		</div>
 		
-		<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
 		
-		<br><br>
-		 
-		</h3>
-	
 	</div>
 	
 	<script type="text/javascript">
@@ -80,9 +99,18 @@
 	</script>
 	
 	<script>
-		let popupBox = document.querySelector('.popupBox');
-		popupBox.onclick = function () {
-			popupBox.classList.toggle('active');
+		let popupOne = document.querySelector('#popup1');
+		let newsDescriptionOne = document.querySelector('#news1');
+		popupOne.onclick = function () {
+			popupOne.classList.toggle('active');
+			newsDescriptionOne.classList.toggle('active');
+		}
+		
+		let popupTwo = document.querySelector('#popup2');
+		let newsDescriptionTwo = document.querySelector('#news2');
+		popupTwo.onclick = function () {
+			popupTwo.classList.toggle('active');
+			newsDescriptionTwo.classList.toggle('active');
 		}
 	</script>
 	
