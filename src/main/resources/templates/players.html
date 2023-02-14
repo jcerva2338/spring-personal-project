@@ -133,6 +133,7 @@
 			const url = new URL('http://localhost:8080/players/deletePlayer');
 			url.searchParams.append("playerId", btnId);
 			window.location = url;
+			console.log("Deleted: " + btnId);
 		}
 	}
 	

@@ -38,6 +38,17 @@
 	
 	</header>
 	
+	<div class="popup">
+		<div class="popupBox">
+		
+		</div>
+		
+		<div class="popupText">
+		
+		</div>
+	</div>
+	
+	
 	<div class="news-box">
 	
 		<h1 class="news-headline">About Project</h1>
@@ -67,8 +78,19 @@
 			
 		}
 	</script>
+	
+	<script>
+		let popupBox = document.querySelector('.popupBox');
+		popupBox.onclick = function () {
+			popupBox.classList.toggle('active');
+		}
+	</script>
+	
 
-	<footer>Placeholder</footer>
+	<footer>
+	<hr>
+		<a href="https://github.com/jcerva2338/spring-personal-project" class="footer-link">GitHub</a> 
+	</footer>
 </body>
 
 

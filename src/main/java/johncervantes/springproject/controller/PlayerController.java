@@ -1,8 +1,11 @@
 package johncervantes.springproject.controller;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -124,6 +127,7 @@ public class PlayerController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			playerRepository.deleteById(playerId);
+			System.out.println("DONE!");
 		}
 		return "redirect:/players";
 	}
@@ -134,15 +138,45 @@ public class PlayerController {
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			Player player = playerRepository.getById(playerId);
 			
-			theModel.addAttribute("player", player);
 			try {
 				player.getPlayerStats().deserializeDailyGoalMap();
 				player.getPlayerStats().serializeDailyGoalMap();
-				System.out.println("hi");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("ERROR!");
 			}
+			
+			theModel.addAttribute("player", player);
+			
+//			try {
+//				player.getPlayerStats().deserializeDailyGoalMap();
+//				player.getPlayerStats().serializeDailyGoalMap();
+//				System.out.println("hi");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+			System.out.println("In progress!");
+			HashMap<String, Integer> playerStats = player.getPlayerStats().getDailyGoalMap();
+			Set<String> dateSet = playerStats.keySet();
+			String[] dates = dateSet.toArray(new String[dateSet.size()]);
+			
+			Integer[] goals = (Integer[]) playerStats.values().toArray(new Integer[playerStats.values().size()]);
+			
+			for (String s : dates) {
+				System.out.println(s);
+			}
+			
+			for (Integer i : goals) {
+				System.out.println(i);
+			}
+			
+			System.out.println("Completed!");
+			
+			theModel.addAttribute("dates", dates);
+			theModel.addAttribute("goals", goals);
+			                
 			theModel.addAttribute("data", player.getPlayerStats().getDailyGoalMapJSON());
 		}
 		

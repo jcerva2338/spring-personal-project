@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,8 @@ public class PlayerStats {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE},
+			fetch = FetchType.LAZY)
 	@JoinColumn(name = "player_id")
 	private Player player;
 	
@@ -55,6 +57,11 @@ public class PlayerStats {
 	}
 	
 	public void deserializeDailyGoalMap() throws IOException {
+		if (dailyGoalMapJSON == null) { 
+			this.dailyGoalMap = new HashMap<>();
+			return; 
+		}
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		this.dailyGoalMap = objectMapper.readValue(dailyGoalMapJSON, new TypeReference<HashMap<String, Integer>>() {});
 	}

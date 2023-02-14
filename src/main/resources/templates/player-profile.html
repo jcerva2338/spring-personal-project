@@ -7,6 +7,7 @@
   <title>Home</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
   <link rel="stylesheet" th:href="@{/style.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -38,7 +39,9 @@
 	</header>
 	
 	<span id="span_id" th:text="${player.head}" hidden="true"></span>
-	<span id="json_data" th:text="${data}"></span>
+	<span id="dates" th:text="${dates}" hidden="true"></span>
+	<span id="goals" th:text="${goals}" hidden="true"></span>
+
 
 	<div class="playerTitle">
 		
@@ -48,45 +51,62 @@
 	
 	</div>
 	
-		<table class="playerStatTable">
-	
-			<thead>
-				<tr>
-					<th>Statistics</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>ID</th>
-					<th>Goals</th>
-				</tr>
-			</thead>
+	<table class="playerStatTable">
+
+		<thead>
+			<tr>
+				<th>Statistics</th>
+				<th></th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Goals</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr>
+				<th th:text="${player.id}"></th>
+				<th th:text="${player.playerStats.getGoals()}"></th>
+			</tr>
 			
-			<tbody>
-				<tr>
-					<th th:text="${player.id}"></th>
-					<th th:text="${player.playerStats.getGoals()}"></th>
-				</tr>
-				
-			</tbody>
+		</tbody>
+
+
+	</table>
 	
+	<div class="plot" id="tester" style="position: fixed; transform: translate(-50%, -50%); left: 1000px; top:750px;"></div>
 	
-		</table>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		var data = {
+			x: /*[[${dates}]]*/,
+			y: /*[[${goals}]]*/,
+			type: 'bar',
+			title: "Hello",
+			width: 50000000,
+			marker: {
+			    color: 'rgb(158,202,225)',
+			    line: {
+			      color: 'rgb(8,48,107)',
+			      width: 0.5
+			    }
+			  }
+		};
+		
+		var layout = {
+				  title: 'Player Goals By Date'
+		};
+		TESTER = document.getElementById('tester');
+		Plotly.newPlot(TESTER, [data], layout);
+		/*]]>*/
+	</script>
 	
 	<script type="text/javascript">
 		function init() {document.getElementById("hair").src="/images/" + document.getElementById("span_id").innerHTML + "-hair.png"};
 	  	window.onload = init;
 	</script>
 	
-	<script>
-		window.onload = function () {
-			var jsonData = JSON.parse(document.getElementById("json_data").innerHTML);
-			
-			var res = $.each($.parseJSON(jsonData), function(k, v) {
-				alert(k + v);
-			});
-			
-		}
-	</script>
 </body>
 
 

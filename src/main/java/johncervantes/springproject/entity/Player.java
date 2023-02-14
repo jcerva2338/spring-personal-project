@@ -38,7 +38,7 @@ public class Player {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "player")
+	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "player")
 	private PlayerStats playerStats;
 	
 	
