@@ -10,11 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.UserRepository;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 	
 	// isAuthenticated():
