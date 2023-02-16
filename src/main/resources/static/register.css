@@ -101,3 +101,87 @@ form {
 	background-position-x: 250px;
 	}
 }
+
+.inputBox #toggleBtn {
+	position: absolute;
+	padding: 0 0;
+	bottom: 10px;
+	left: 85%;
+	width: 34px;
+	height: 34px;
+	
+	pointer-events: auto;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: none !important;
+	transition: none;
+	
+	background: gray;
+	border-radius: 50%;
+}
+
+.inputBox #toggleBtn::before {
+	content: '\f06e';
+	font-family: fontAwesome;
+}
+
+.inputBox #toggleBtn.hide::before {
+	content: '\f070';
+	font-family: fontAwesome;
+}
+
+.validation ul {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	
+}
+
+.validation ul li {
+	position: relative;
+	list-style: none;
+	color: #fff;
+	font-size: 0.85em;
+	transition: 0.5s;
+}
+
+.validation ul li::before {
+	content: '\f1ce';
+	font-family: fontAwesome;
+	width: 20px;
+	height: 10px;
+	display: inline-flex;
+	
+	justify-content: center;
+	align-items: center;
+	transition: 0.5s;
+	
+}
+
+.validation ul li.valid {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.validation ul li.valid::before {
+	content: '\f00c';
+	color: lime;
+	font-family: fontAwesome;
+	
+	transition: 0.5s;
+}
+
+#submit {
+	width: 80px;
+	height: 60px;
+	border-radius: 30px;
+	pointer-events: auto;
+}
+
+#submit.disabled {
+	pointer-events: none;
+	background: rgba(255, 255, 255, 0.5);
+	color: rgba(0, 0, 0, 0.5);
+}

@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import johncervantes.springproject.entity.Player;
+import johncervantes.springproject.entity.Role;
 import johncervantes.springproject.entity.User;
 
 public class CustomUserDetails implements UserDetails {
@@ -14,6 +15,16 @@ public class CustomUserDetails implements UserDetails {
 	
 	public CustomUserDetails(User  user) {
 		this.user = user;
+	}
+	
+	public CustomUserDetails(String username, String password, Collection<Role> authorities) {
+		User newUser = new User();
+		
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+		newUser.setRoles(authorities);
+		this.user = newUser;
+		
 	}
 	
 	@Override

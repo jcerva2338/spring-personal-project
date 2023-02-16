@@ -1,6 +1,7 @@
 package johncervantes.springproject.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,10 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 
 @Entity
 @Table(name = "user")
@@ -43,6 +44,12 @@ public class User {
 			   cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private List<Player> players;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_roles", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Collection<Role> roles;
+	
 	public User() {}
 
 	public User(String username, String password, String email, int currency, String team) {
@@ -51,6 +58,17 @@ public class User {
 		this.email = email;
 		this.currency = currency;
 		this.team = team;
+	}
+
+	public User(String username, String password, String email, String team, int currency, List<Player> players,
+			Collection<Role> roles) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.team = team;
+		this.currency = currency;
+		this.players = players;
+		this.roles = roles;
 	}
 
 	public int getId() {
@@ -115,6 +133,20 @@ public class User {
 		}
 		
 		this.players.add(player);
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", team="
+				+ team + ", currency=" + currency + ", players=" + players + ", roles=" + roles + "]";
 	}
 	
 	

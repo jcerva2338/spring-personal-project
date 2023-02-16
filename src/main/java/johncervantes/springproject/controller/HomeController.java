@@ -1,7 +1,5 @@
 package johncervantes.springproject.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,21 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import johncervantes.springproject.auth.CustomUserDetails;
-import johncervantes.springproject.entity.Player;
-import johncervantes.springproject.entity.PlayerStats;
-import johncervantes.springproject.entity.User;
-import johncervantes.springproject.repository.PlayerRepository;
 import johncervantes.springproject.repository.UserRepository;
+import johncervantes.springproject.service.UserService;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController {
-	
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
-	private PlayerRepository playerRepository;
+	private UserService userService;
 	
 	Authentication auth;
 	
@@ -35,7 +29,7 @@ public class HomeController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
-			theModel.addAttribute("user", userRepository.getById(details.getId()));
+			theModel.addAttribute("user",  userRepository.findByEmail(details.getUsername()));
 		}
 		
 		return "home";
@@ -43,19 +37,19 @@ public class HomeController {
 	
 	@GetMapping("/addPlayer")
 	public String addPlayer(Model theModel) {
-		auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
-			User user = userRepository.findByEmail(details.getEmail());
-			
-			Player player = new Player("Ok", "Ok", new PlayerStats());
-			
-			player.getPlayerStats().setPlayer(player);
-			
-			user.addPlayer(player);
-			
-			playerRepository.save(player);
-		}
+//		auth = SecurityContextHolder.getContext().getAuthentication();
+//		if (!(auth instanceof AnonymousAuthenticationToken)) {
+//			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
+//			User user = userRepository.findByEmail(details.getEmail());
+//			
+//			Player player = new Player("Ok", "Ok", new PlayerStats());
+//			
+//			player.getPlayerStats().setPlayer(player);
+//			
+//			user.addPlayer(player);
+//			
+//			playerRepository.save(player);
+//		}
 		
 		return "redirect:/home";
 	}

@@ -27,12 +27,16 @@ import johncervantes.springproject.entity.PlayerStats;
 import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.PlayerRepository;
 import johncervantes.springproject.repository.UserRepository;
+import johncervantes.springproject.service.UserService;
 
 @Controller
 @RequestMapping("/players")
 public class PlayerController {
 	
 	Authentication auth;
+	
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -98,7 +102,8 @@ public class PlayerController {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
-			User user = userRepository.findByEmail(details.getEmail());
+
+			User user = userService.findByUserName(details.getUsername());
 			
 			Random random = new Random();
 			

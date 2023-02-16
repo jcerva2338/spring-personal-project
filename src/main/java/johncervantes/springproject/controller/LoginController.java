@@ -16,7 +16,6 @@ import johncervantes.springproject.entity.User;
 import johncervantes.springproject.repository.UserRepository;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	
 	// isAuthenticated():
@@ -38,6 +37,11 @@ public class LoginController {
 	private UserRepository userRepository;
 	
 	@GetMapping("")
+	public String homePage() {
+		return "fancy-login";
+	}
+	
+	@GetMapping("/login")
 	public String l() {
 		// Call helper function to check if the current user is logged in, if so, redirect
 		// to home page
@@ -45,28 +49,7 @@ public class LoginController {
 			return "redirect:/home";
 		}
 		
-		return "fancy-login"; // Otherwise the user is not authenticated and has to log in
-	}
-	
-	@GetMapping("/register")
-	public String showRegisterForm(Model theModel) {
-		theModel.addAttribute("user", new User());
-		
-		return "register-form";
-	}
-	
-	@PostMapping("/process-registration")
-	public String processRegistration(@ModelAttribute("user") User user) {
-		
-		// Encode the user entered password and reinsert BCrypt equivalent into password field
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-		user.setCurrency(100);
-		
-		userRepository.save(user);
-		
-		return "register-success";
+		return "login"; // Otherwise the user is not authenticated and has to log in
 	}
 	
 	@GetMapping("/showMyLoginPage")

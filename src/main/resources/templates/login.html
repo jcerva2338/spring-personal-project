@@ -1,17 +1,63 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
-	<meta charset="UTF-8">
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" th:href="@{/register.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	
 	<title>Login</title>
 
 </head>
 
 <body>
 
-
+	<form th:action="@{/authenticateTheUser}"
+			method="POST" style="max-width: 600px; margin: 0 auto;">
+			<div class="inputBox">
+				<input type="text" name="username" class="form-control" id="username" onkeyup="enableSubmit()" required />
+				<span>Username</span>
+				<i></i>
+			</div>
+		
+			<div class="inputBox">
+				<input type="password" name="password" class="form-control" id="pswrd" onkeyup="enableSubmit()" required />
+				<span id="toggleBtn"></span>
+				<span>Password</span>
+				<i></i>
+			</div>
+				
+			<div>
+				<button type="submit" class="btn btn-primary disabled" id="submit">Sign in</button>
+			</div>
+			
+	</form>
+	
+	<script type="text/javascript">
+	
+		let usernameField = document.getElementById("username");
+		let passwordField = document.getElementById("pswrd");
+		
+		let submitBtn = document.getElementById("submit");
+		
+		function enableSubmit() {
+			const usernameLength = new RegExp('(?=.{1,})');
+			const passwordLength = new RegExp('(?=.{1,})');
+			
+			if (usernameLength.test(usernameField.value) && passwordLength.test(passwordField.value)) {
+				submitBtn.classList.remove('disabled');
+			}
+			else {
+				submitBtn.classList.add('disabled');
+			}
+		}
+	</script>
 
 </body>
 
