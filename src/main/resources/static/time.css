@@ -1,0 +1,11 @@
+#time {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	pointer-events: none;
+	opacity: 50%;
+	gap: 20px;
+	left: 90%;
+	top: 29%;
+}

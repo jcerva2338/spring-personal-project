@@ -8,6 +8,7 @@
   <meta charset="UTF-8"/>
   <title>Home</title>
   <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link rel="stylesheet" th:href="@{/time.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -32,8 +33,28 @@
 			<a href="/matchday" id ="style-2" data-replace="Let's start!"><span>Match-Day</span></a>
 			<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
 			<a href="#" onclick="addSortMethod()" id ="style-2" data-replace="Player Database"><span>Player Database</span></a>
-			<a href="" id ="style-2" data-replace="Logout"><span>Logout</span></a>
+			<form th:action="@{/logout}"  method="POST">
+				<div class="logoutButton">
+					<input id="logout" type="submit" value="Logout" data-replace="Logout">
+				</div>
+			</form>
 		
+		</div>
+		
+		<div id="time">
+			<div class="circle">
+				<div id="hours">00</div>
+			</div>
+			<div class="circle">
+				<div id="minutes">00</div>
+			</div>
+			<div class="circle">
+				<div id="seconds">00</div>
+			</div>
+			
+			<div class="ap">
+				<div id="ampm">AM</div>
+			</div>
 		</div>
 	
 	</header>
@@ -112,6 +133,36 @@
 			popupTwo.classList.toggle('active');
 			newsDescriptionTwo.classList.toggle('active');
 		}
+	</script>
+	
+	<script type="text/javascript">
+		setInterval(() => {
+			let hrs = document.getElementById('hours');
+			let mins = document.getElementById('minutes');
+			let secs = document.getElementById('seconds');
+			let ampm = document.getElementById('ampm');
+			
+			let h = new Date().getHours();
+			let m = new Date().getMinutes();
+			let s = new Date().getSeconds();
+			let am = h >= 12 ? "PM" : "AM";
+			
+			// convert 24hr clock to 12hr clock
+			if (h > 12) {
+				h = h - 12;
+			}
+			
+			// add zero before single digit number
+			h = (h < 10) ? "0" + h : h;
+			m = (m < 10) ? "0" + m : m;
+			s = (s < 10) ? "0" + s : s;
+			
+			hrs.innerHTML = h;
+			mins.innerHTML = m;
+			seconds.innerHTML = s;
+			ampm.innerHTML = am;
+		})
+	
 	</script>
 	
 

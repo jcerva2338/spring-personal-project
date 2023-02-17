@@ -1,12 +1,29 @@
 package johncervantes.springproject.user;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CrmUser {
+	
+	@Valid
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private String username;
 	
+	@Valid
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private String password;
 	
+	@Valid
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private String email;
 	
+	@Valid
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private String team;
 	
 	private int currency;

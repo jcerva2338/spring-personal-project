@@ -7,6 +7,7 @@
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" th:href="@{/register.css}">
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/alert-error.css}">
 	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,6 +21,15 @@
 
 	<form th:action="@{/authenticateTheUser}"
 			method="POST" style="max-width: 600px; margin: 0 auto;">
+			
+			<div th:if="${param.error}" class="alert" id="error">
+			
+				<span id="errorMessage">Invalid username or password</span>
+				
+			</div>
+			
+			<div th:if="${param.logout}" class="successNotif">You have been logged out.</div>
+			
 			<div class="inputBox">
 				<input type="text" name="username" class="form-control" id="username" onkeyup="enableSubmit()" required />
 				<span>Username</span>
@@ -43,7 +53,7 @@
 	
 		let usernameField = document.getElementById("username");
 		let passwordField = document.getElementById("pswrd");
-		
+		let toggleBtn = document.getElementById("toggleBtn");
 		let submitBtn = document.getElementById("submit");
 		
 		function enableSubmit() {
@@ -55,6 +65,17 @@
 			}
 			else {
 				submitBtn.classList.add('disabled');
+			}
+		}
+		
+		toggleBtn.onclick = function () {
+			if (passwordField.type === 'password') {
+				passwordField.setAttribute('type', 'text');
+				toggleBtn.classList.add('hide');
+			}
+			else {
+				passwordField.setAttribute('type', 'password');
+				toggleBtn.classList.remove('hide');
 			}
 		}
 	</script>

@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="utf-8">
 	<title>Registration in progress...</title>
+	<link rel="stylesheet" th:href="@{/alert-error.css}">
 	<link rel="stylesheet" th:href="@{/register.css}">
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
@@ -20,10 +21,23 @@
 		
 		<form th:action="@{/register/process-registration}" th:object="${user}"
 			method="POST" style="max-width: 600px; margin: 0 auto;">
+				
+				<div th:if="${registrationError}" class="alert" id="error">
+			
+					<span id="errorMessage">Username already exists</span>
+				
+				</div>
+			
 				<div class="inputBox">
-					<input type="text" th:field="*{username}" class="form-control" required />
+					<input type="text" th:field="*{username}" class="form-control" required="required" />
 					<span>Username</span>
 					<i></i>
+				</div>
+				
+				<div th:if="${#fields.hasErrors('username')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('username')}" th:text="'User name ' + ${err}"/>
+					</ul>
 				</div>
 			
 				<div class="inputBox">
@@ -131,6 +145,21 @@
 				}
 				else {
 					submitBtn.classList.add('disabled');
+				}
+			}
+			
+			function checkValid(data, id) {
+				let elem = document.getElementById(id);
+				
+				const length = new RegExp('(?=.{1,})');
+				if (length.test(data)) {
+					elem.validity.ValidityState.valid = 'false';
+					elem.setAttribute('valid', 'true');
+					
+				}
+				else {
+					elem.validity.valid = 'false';
+					elem.setAttribute('valid', 'false');
 				}
 			}
 			

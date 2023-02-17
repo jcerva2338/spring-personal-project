@@ -38,6 +38,11 @@ public class LoginController {
 	
 	@GetMapping("")
 	public String homePage() {
+		
+		if (isAuthenticated()) {
+			return "redirect:/home";
+		}
+		
 		return "fancy-login";
 	}
 	

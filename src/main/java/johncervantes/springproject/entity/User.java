@@ -16,26 +16,28 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "user")
 public class User {
+	@Valid
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	@Valid
 	@Column(name = "username")
 	private String username;
-	
+	@Valid
 	@Column(name = "password")
 	private String password;
-	
+	@Valid
 	@Column(name = "email")
 	private String email;
-	
+	@Valid
 	@Column(name = "team")
 	private String team;
-	
+	@Valid
 	@Column(name = "currency")
 	private int currency;
 	

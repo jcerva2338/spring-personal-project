@@ -2,6 +2,36 @@
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
+.logoutButton {
+	padding-top: 10px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: blue;
+}
+
+.logoutButton #logout {
+	position: relative;
+	left: 0;
+	width: 50px;
+	color: #999;
+	font-size: 15px;
+	
+	font-weight: 700;
+	
+	border: none;
+	background: none;
+	transition: 0.5s;
+}
+
+.logoutButton #logout:hover {
+	display: inline-block;
+	transform: scale(1.5, 1.5);
+  	transition: 0.5s;
+	color: #537EBA;
+}
+
 .wrapper {
 	margin: 0 auto;
 	width: 960px;

@@ -40,3 +40,27 @@
 .closebtn:hover {
 	color:black;
 }
+
+.successNotif {
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 8%;
+	
+	font-family: 'Allerta Stencil', sans-serif;
+	font-weight: bolder;
+	position: absolute;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #65e084;
+	color: white;
+	margin-bottom: 15px;
+	
+	opacity: 1;
+	transition: opacity 1s;
+	transition-property: all;
+}
+
+.successNotif:hover {
+	background-color: #71eb8f;
+	transition: ease-in-out 0.5s;
+}

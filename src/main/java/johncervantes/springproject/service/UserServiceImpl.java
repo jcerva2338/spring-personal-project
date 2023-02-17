@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
 		user.setEmail(crmUser.getEmail());
 		user.setTeam(crmUser.getTeam());
+		user.setCurrency(crmUser.getCurrency());
 		
 		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
 		
