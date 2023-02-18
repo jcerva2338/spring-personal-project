@@ -117,10 +117,11 @@ public class PlayerController {
 				player.getPlayerStats().setGoals(0);
 				user.setCurrency(user.getCurrency() - 300);
 				
+				player.setUser(user);
 				user.addPlayer(player);
 			}
 			
-			player.setUser(user);
+//			player.setUser(user);
 			playerRepository.save(player);
 		}
 		

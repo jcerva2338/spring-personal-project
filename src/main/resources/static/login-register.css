@@ -33,5 +33,38 @@ h1 {
 .user-options {
 	position: absolute;
 	padding-top: 30px;
-	left: 50%;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	top: 300px;
+	left: 200px;
+	
+	margin-right: 30px;
+	
+}
+
+.opt {
+	background-color: #2e79f2;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Allerta Stencil', sans-serif;
+	font-stretch: inherited;
+	padding: 20px 34px;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 25px;
+	border-style: inset;
+	margin-top: 50px;
+	
+	color: white;
+	position: relative;
+
+}
+
+.opt:hover {
+	transition: all 0.3s ease-in-out;
+	opacity: 0.9;
 }

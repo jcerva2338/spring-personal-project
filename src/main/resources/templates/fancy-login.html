@@ -4,9 +4,14 @@
 	<meta charset="ISO-8859-1">
 	<title>Welcome to project home</title>
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/menu.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/login-register.css}" />
+	<link rel="stylesheet" th:href="@{/style.css}"/>
+	
 	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,14 +21,14 @@
 
 
 <body>
-	<div class="container text-center">
-		<h1>Welcome to Blue Lock</h1>
-		<hr>
-	</div>	
+	
+	<img class="bg" alt="" src="/images/menu.png">
 	
 	<div class="user-options">
-		<h3><a th:href="@{/login}" class="option">Login</a></h3>
-		<h3><a th:href="@{/register}" class="option">Register</a></h3>
+		<img alt="" src="/images/logo.png">
+		<span class="logoText">SIMULATOR</span>
+		<h3><a th:href="@{/login}" class="opt">Login</a></h3>
+		<h3><a th:href="@{/register}" class="opt">Register</a></h3>
 	</div>
 
 

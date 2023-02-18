@@ -15,7 +15,7 @@ body {
 	flex-direction: column;
 	gap: 30px;
 	
-	background: #222;
+	background: #F9F4F4;
 }
 
 form {	
@@ -34,7 +34,7 @@ form {
 .inputBox input {
 	width: 100%;
 	background: transparent;
-	color: #fff;
+	color: #999;
 	border: none;
 	outline: none;
 	box-shadow: none;
@@ -47,7 +47,7 @@ form {
 	position: absolute;
 	left: 0;
 	padding: 10px 0 5px;
-	color: rgba(255, 255, 255, 0.5);
+	color: rgba(66, 135, 245, 0.5);;
 	text-transform: uppercase;
 	pointer-events: none;
 	letter-spacing: 0.1em;
@@ -177,6 +177,7 @@ form {
 	width: 80px;
 	height: 60px;
 	border-radius: 30px;
+	border-color: #2196f3;
 	pointer-events: auto;
 }
 

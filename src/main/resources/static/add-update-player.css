@@ -1,0 +1,21 @@
+h1 {
+	font-family: 'Anton', sans-serif;
+	pointer-events: none;
+	letter-spacing: 0.1em;
+	position: fixed;
+	color: white;
+	top: 50px;
+	left: 50px;
+	-webkit-text-stroke: 0.1px #2196f3;
+	box-shadow: 2px 2px 4px 2p #999;
+}
+
+a {
+	color: gray;
+	transition: 0.5s;
+}
+
+a:hover {
+	transition: 0.5s;
+	color: blue;
+}

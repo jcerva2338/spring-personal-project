@@ -1,0 +1,25 @@
+html {
+	background: #F9F4F4;
+}
+
+body {
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.bg {
+	position: fixed;
+	bottom: 0px;
+	right: -500px;
+	
+	transform: rotate(-55deg);
+	height: 100%;
+	overflow: hidden;
+	object-fit: scale-down;
+	max-width: 2600px;
+	max-height: 1300px;
+	z-index: -1;
+	float: right;
+	
+}
+

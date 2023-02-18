@@ -3,7 +3,6 @@
 }
 
 .logoutButton {
-	padding-top: 10px;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -16,7 +15,7 @@
 	left: 0;
 	width: 50px;
 	color: #999;
-	font-size: 15px;
+	font-size: 16px;
 	
 	font-weight: 700;
 	
@@ -49,11 +48,11 @@
 }
 .logoText {
 	position: relative;
-	font-family: 'Allerta Stencil', sans-serif;
+	font-family: 'Anton', sans-serif;
 	font-size: 30px;
 	color: white;
 	font-weight: 2900;
-	-webkit-text-stroke: 1.5px #537EBA;
+	-webkit-text-stroke: 2.0px #537EBA;
 }
 
 .logoText span {
@@ -80,7 +79,11 @@ th, td {
 }
 
 table{
-	width: 100%;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	top: 40%;
+	left: 50%;
+	width: 90%;
 }
 
 .playersListTable thead,td,th,tr{
@@ -122,7 +125,19 @@ footer {
 	text-align: center;
 }
 
+.navigation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .navigation a{
+	color: #999;
+	padding: 8px 12px;
+	text-decoration: active;
+}
+
+.navigation form{
 	color: #999;
 	padding: 8px 12px;
 	text-decoration: active;
