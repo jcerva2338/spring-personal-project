@@ -26,7 +26,7 @@
 
 .logoutButton #logout:hover {
 	display: inline-block;
-	transform: scale(1.5, 1.5);
+	transform: scale(1.3, 1.3);
   	transition: 0.5s;
 	color: #537EBA;
 }
@@ -65,13 +65,124 @@ header {
 	padding-bottom:15px;;
 	border-bottom: 1px solid #e4e4e4;
 	align-items: center;
+}
+
+#teamIcon:before {
+	content: '\e533';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
 	
+	transition: 0.5s;
+}
+
+#currencyIcon:before {
+	content: '\f51e';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+
+#homeOption:before {
+	content: '\f015';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+#playersOption:before {
+	content: '\f0c0';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+#matchdayOption:before {
+	content: '\f1e3';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+#statsOption:before {
+	content: '\f02d';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+#logoutOption:before {
+	content: '\f2f5';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
+}
+
+#databaseOption:before {
+	content: '\f1c0';
+	font-family: fontAwesome;
+	height: 30px;
+	width: 30px;
+	color: rgba(0,0,0,0.5);
+	
+	transition: 0.5s;
 }
 
 th{
 	font-family: 'Allerta Stencil', sans-serif;
 	background-color: #2B6EDB;
 	color: white;
+}
+
+.playerListTable td {
+	font-family: 'Allerta Stencil', sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+}
+
+#playersTableHeading {
+	color: #2B6EDB;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	font-size: 30px;
+	font-family: 'Allerta Stencil', sans-serif;
+	top: 300px;
+	padding-left: 350px;
+	pointer-events: none;
+	text-align: center;
+}
+
+.addOptions {
+	position: relative;
+	top: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.addOptions a {
+	border-radius: 10px;
 }
 
 th, td {
@@ -103,6 +214,10 @@ table{
 }
 
 .teamInfo {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	
 	width:auto;
 	margin-right:auto;
 	font-size:25px;
@@ -121,6 +236,7 @@ footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	background-color: white;
 	color: rgb(192, 192, 192);
 	text-align: center;
 }
@@ -129,12 +245,20 @@ footer {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 10px;
+	
+	padding-right: 30px;
 }
 
-.navigation a{
+.navigation > span {
+	margin-left: -12px;
+}
+
+.navigation > a{
 	color: #999;
 	padding: 8px 12px;
 	text-decoration: active;
+	
 }
 
 .navigation form{
@@ -181,12 +305,47 @@ a::after {
   color: #2B6EDB;
 }
 
-a:hover::before {
+a:hover::before{
   transform-origin: 0% 50%;
   transform: scaleX(1);
 }
 a:hover::after {
   transform: translate3d(0, 0, 0);
+}
+
+a:hover + #homeOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#playerHref:hover + #playersOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#matchdayHref:hover + #matchdayOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#statsHref:hover + #statsOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#logoutHref:hover + #logoutOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#logoutForm:hover  ~ #logoutOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
+}
+
+#databaseHref:hover + #databaseOption::before {
+	transition: 0.5s;
+	color: #2B6EDB;
 }
 
 a span {
@@ -348,11 +507,17 @@ a {
 	box-shadow: 0px 4px 8px 0px #2e79f2;
 	background: #accbfc 5%;
 	color: gray;
+	
 	height: 500px;
 	width: 400px;
+	
 	left: 120px;
-	top: 220px;
+	top: 350px;
 	max-width: 500px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .playerHeader {
@@ -366,9 +531,9 @@ a {
 	justify-content: center;
 	align-items: center;
 	
-	top: 50px;
+	top: -150px;
 	font-size: 45px;
-
+	width: 100%;
 }
 
 .imgHair {
@@ -407,12 +572,27 @@ a {
 	box-sizing: content-box;
 }
 
-.playerStatTable {
+.playerStats {
 	position: absolute;
-	transform: translate(-50%, -50%);
-	top: 312px;
-	left: 1100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	gap: 300px;
+	flex-direction: column;
+	top: 150px;
+	left: 600px;
+}
+
+.playerStats table, .playerStats .plot {
+}
+
+.playerStatTable {
+	position: relative;
 	max-width: 800px;
+	left: 300px;
+	top: 300px;
+	width: 600px;
 }
 
 .lineup-select {
@@ -598,18 +778,58 @@ recap hr {
 
 .footer-link {
 	transform: translate(-50%, -50%);
-	padding-top: 20px;
+	padding-top: 30px;
 	float: right;
+	transition: 0.7s;
  	
 }
 
+#githubLogo::before {
+	padding-top: 7px;
+	position: relative;
+	content: '\f09b';
+	font-family: fontAwesome;
+	width: 30px;
+	height: 30px;
+	right: 20px;
+	float: right;
+	color: black;
+}
+
+#linkedinLogo::before {
+	padding-top: 7px;
+	padding-right: 5px;
+	position: relative;
+	content: '\f0e1';
+	font-family: fontAwesome;
+	width: 30px;
+	height: 30px;
+	right: 20px;
+	float: right;
+	color: black;
+}
+
+
 .footer-link:hover {
-	color: red;	
+	color: #2B6EDB;
+	transition: 0.7s;	
+}
+
+.popupCollection {
+	position: fixed;
+	width: 250px;
+	height: 100%;
+	background: #2660bf;
+	display: flex;
+	gap: 250px;
+	float: left;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .popup {
-	padding-top: 50px;
-	padding-left: 50px;
+	top: -300px;
 	float: left;
 	position: relative;
 	display: flex;
@@ -630,18 +850,17 @@ recap hr {
 	align-items: center;
 }
 
-.popupBox::before {
-	content: "About";
-	position: absolute;
+.popupBox span {
+	font-family: 'Anton', sans-serif;
 	text-align: center;
+	font-size: 2.1em;
 	color:white;
-	font-family: 'Allerta Stencil', sans-serif;
-	font-size: 3em;
 	font-weight: 500;
-	-webkit-text-stroke: 1.5px #537EBA;
 	
+	-webkit-text-stroke: 1.5px #537EBA;
 	transition: 1.0s;
 }
+
 
 .popupBox.active{
 	opacity: 0.5;
@@ -657,14 +876,17 @@ recap hr {
 	border-radius: 70px;
 	border: 3px solid #537EBA;
 	z-index: -2;
-	
 	transition: transform 0.5s, width 0.5s, height 0.5s;
 
 	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .popupBox.active ~ .popupText {
-	top: 100px;
+	top: 50px;
 	width: 700px;
 	max-width: 700px;
 	height: 400px;
@@ -673,16 +895,19 @@ recap hr {
 	z-index: 1;
 	visibility: visible;
 
-	transform: translateX(500px);
+	transform: translateX(450px);
 	transition-delay: 0s, 0.5s, 0.5s;
 }
 
 .news-description.active {
+	position: relative;
+	top: -50px;
 	font-family: 'Allerta Stencil', sans-serif;
 	width: 600px;
 	max-width: 600px;
 	overflow: visible;
-	padding-top: 50px;
+	
+	padding-top: 10px;
 	padding-left: 30px;
 	padding-right: 30px;
 	visibility: visible;

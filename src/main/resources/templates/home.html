@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 
@@ -29,25 +30,33 @@
 			<p th:text="'Team // &emsp;' +  ${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + 'Currency // &emsp;' + ${user.currency}" >
 		</div>
 		<div class="navigation">
-			<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
-			<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
-			<a href="/matchday" id ="style-2" data-replace="Let's start!"><span>Match-Day</span></a>
-			<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
-			<a href="#" onclick="addSortMethod()" id ="style-2" data-replace="Player Database"><span>Player Database</span></a>
-			<form th:action="@{/logout}"  method="POST">
+			<a href="/home" id ="homeHref" data-replace="Home"><span>Home</span></a>
+			<span id="homeOption"></span>
+			<a href="/players" id ="playerHref" data-replace="Players"><span>Players</span></a>
+			<span id="playersOption"></span>
+			<a href="/matchday" id ="matchdayHref" data-replace="Let's start!"><span>Match-Day</span></a>
+			<span id="matchdayOption"></span>
+			<a href="" id ="statsHref" data-replace="Stats"><span>Stats</span></a>
+			<span id="statsOption"></span>
+			<a href="#" onclick="addSortMethod()" id ="databaseHref" data-replace="Player Database"><span>Player Database</span></a>
+			<span id="databaseOption"></span>
+			<form th:action="@{/logout}"  method="POST" id="logoutForm">
 				<div class="logoutButton">
 					<input id="logout" type="submit" value="Logout" data-replace="Logout">
 				</div>
 			</form>
+			<span id="logoutOption"></span>
 			
 			
 			<div id="time">
 				<div class="circle">
 					<div id="hours">00</div>
 				</div>
+				<span>:</span>
 				<div class="circle">
 					<div id="minutes">00</div>
 				</div>
+				<span>:</span>
 				<div class="circle">
 					<div id="seconds">00</div>
 				</div>
@@ -60,54 +69,57 @@
 	
 	</header>
 	
-	<div class="popup">
-		<div class="popupBox" id="popup1">
+	<div class="popupCollection">
+		<div class="popup">
+			<div class="popupBox" id="popup1">
+				<span>About</span>
+			</div>
+			
+			<div class="popupText">
+				<h3 class="news-description" id="news1">The following project was inspired by the Japanese television 
+				show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
+				This project draws inspiration from Blue Lock and applies it throughout the design of the pages
+				and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
+				to earn currency to then sign more players and build their teams, attempting to have the best team.
+				
+				<br><br>
+				Find out more about Blue Lock here:
+				
+				<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
+				
+				<br><br>
+				 
+				</h3>
+			</div>
+			
 			
 		</div>
 		
-		<div class="popupText">
-			<h3 class="news-description" id="news1">The following project was inspired by the Japanese television 
-			show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
-			This project draws inspiration from Blue Lock and applies it throughout the design of the pages
-			and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
-			to earn currency to then sign more players and build their teams, attempting to have the best team.
+		<div class="popup">
+			<div class="popupBox" id="popup2" >
+				<span>More 
+				Projects</span>
+			</div>
 			
-			<br><br>
-			Find out more about Blue Lock here:
+			<div class="popupText">
+				<h3 class="news-description" id="news2">The following project was inspired by the Japanese television 
+				show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
+				This project draws inspiration from Blue Lock and applies it throughout the design of the pages
+				and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
+				to earn currency to then sign more players and build their teams, attempting to have the best team.
+				
+				<br><br>
+				Find out more about Blue Lock here:
+				
+				<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
+				
+				<br><br>
+				 
+				</h3>
+			</div>
 			
-			<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
 			
-			<br><br>
-			 
-			</h3>
 		</div>
-		
-		
-	</div>
-	
-	<div class="popup">
-		<div class="popupBox" id="popup2" >
-			
-		</div>
-		
-		<div class="popupText">
-			<h3 class="news-description" id="news2">The following project was inspired by the Japanese television 
-			show named Blue Lock originating from the manga series written by Muneyuki Kaneshiro.
-			This project draws inspiration from Blue Lock and applies it throughout the design of the pages
-			and integrates it into a CRUD application. <br>Users are able to create players for their team, retrieve player information, update player information, and delete players. Users are then able to play matches via simulation
-			to earn currency to then sign more players and build their teams, attempting to have the best team.
-			
-			<br><br>
-			Find out more about Blue Lock here:
-			
-			<a href="https://en.wikipedia.org/wiki/Blue_Lock" class="ext-link">https://en.wikipedia.org/wiki/Blue_Lock</a>
-			
-			<br><br>
-			 
-			</h3>
-		</div>
-		
-		
 	</div>
 	
 	<script type="text/javascript">
@@ -168,8 +180,12 @@
 	
 
 	<footer>
-	<hr>
+		<hr>
 		<a href="https://github.com/jcerva2338/spring-personal-project" class="footer-link">GitHub</a> 
+		<span id="githubLogo"></span>
+		
+		<a href="https://www.linkedin.com/in/john-cervantes-387b901a1/" class="footer-link">LinkedIn</a> 
+		<span id="linkedinLogo"></span>
 	</footer>
 </body>
 

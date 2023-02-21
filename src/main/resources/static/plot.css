@@ -1,5 +1,4 @@
 .plot {
+	position: relative;
 	border: 5px solid black;
-	transform: translate(-50%, -50%);
-	top:150px;
 }

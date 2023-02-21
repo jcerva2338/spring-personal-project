@@ -51,31 +51,33 @@
 	
 	</div>
 	
-	<table class="playerStatTable">
-
-		<thead>
-			<tr>
-				<th>Statistics</th>
-				<th></th>
-			</tr>
-			<tr>
-				<th>ID</th>
-				<th>Goals</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<tr>
-				<th th:text="${player.id}"></th>
-				<th th:text="${player.playerStats.getGoals()}"></th>
-			</tr>
-			
-		</tbody>
-
-
-	</table>
+	<div class="playerStats">
+		<table class="playerStatTable">
 	
-	<div class="plot" id="tester" style="position: fixed; transform: translate(-50%, -50%); left: 1000px; top:750px;"></div>
+			<thead>
+				<tr>
+					<th>Statistics</th>
+				</tr>
+				<tr>
+					<th>ID</th>
+					<th>Goals</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<th th:text="${player.id}"></th>
+					<th th:text="${player.playerStats.getGoals()}"></th>
+				</tr>
+				
+			</tbody>
+	
+	
+		</table>
+		
+		<div class="plot" id="tester" style=""></div>
+	
+	</div>
 	
 	<script type="text/javascript" th:inline="javascript">
 		/*<![CDATA[*/

@@ -8,4 +8,17 @@
 	gap: 20px;
 	left: 90%;
 	top: 200px;
+	
+	font-family: 'Anton', sans-serif;
+	font-weight: 500;
+}
+
+#time span {
+	font-family: 'Anton', sans-serif;
+	font-weight: 500;
+}
+
+#time div {
+	font-family: 'Anton', sans-serif;
+	font-weight: 500;
 }
