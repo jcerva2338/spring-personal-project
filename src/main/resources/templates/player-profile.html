@@ -9,10 +9,14 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
   <link rel="stylesheet" th:href="@{/style.css}"/>
+  <link rel="stylesheet" th:href="@{/time.css}"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Montserrat:wght@300&family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 </head>
 
 <body>
@@ -24,59 +28,101 @@
 			</div>
 			
 			<div class="teamInfo">
-				<p th:text="'Player ID' + ${player.id} + ' // ' + ${player.firstName} + ' ' + ${player.lastName}">
+				<span id="teamIcon" th:text=" '&nbsp;' + '&nbsp;' + '&nbsp;' + '&nbsp;' + ${user.team}"></span>
+				<span id="currencyIcon" th:text=" '&nbsp;' + '&nbsp;' + '&nbsp;' + '&nbsp;' + ${user.currency}"></span>
 			</div>
 			
 			<div class="navigation">
-				<a href="/home" id ="style-2" data-replace="Home"><span>Home</span></a>
-				<a href="/players" id ="style-2" data-replace="Players"><span>Players</span></a>
-				<a href="/matchday" id ="style-2" data-replace="Let's start!"><span>Match-Day</span></a>
-				<a href="" id ="style-2" data-replace="Stats"><span>Stats</span></a>
-				<a href="" id ="style-2" data-replace="Logout"><span>Logout</span></a>
+			<a href="/home" id ="homeHref" data-replace="Home"><span>Home</span></a>
+			<span id="homeOption"></span>
+			<a href="/players" id ="playerHref" data-replace="Players"><span>Players</span></a>
+			<span id="playersOption"></span>
+			<a href="/matchday" id ="matchdayHref" data-replace="Let's start!"><span>Match-Day</span></a>
+			<span id="matchdayOption"></span>
+			<a href="" id ="statsHref" data-replace="Stats"><span>Stats</span></a>
+			<span id="statsOption"></span>
+			<a href="#" onclick="addSortMethod()" id ="databaseHref" data-replace="Player Database"><span>Player Database</span></a>
+			<span id="databaseOption"></span>
+			<form th:action="@{/logout}"  method="POST" id="logoutForm">
+				<div class="logoutButton">
+					<input id="logout" type="submit" value="Logout" data-replace="Logout">
+				</div>
+			</form>
+			<span id="logoutOption"></span>
 			
+			
+			<div id="time">
+				<div class="circle">
+					<div id="hours">00</div>
+				</div>
+				<span>:</span>
+				<div class="circle">
+					<div id="minutes">00</div>
+				</div>
+				<span>:</span>
+				<div class="circle">
+					<div id="seconds">00</div>
+				</div>
+				
+				<div class="ap">
+					<div id="ampm">AM</div>
+				</div>
 			</div>
+		</div>
 			
 	</header>
 	
 	<span id="span_id" th:text="${player.head}" hidden="true"></span>
 	<span id="dates" th:text="${dates}" hidden="true"></span>
 	<span id="goals" th:text="${goals}" hidden="true"></span>
+	<span id="appearances" th:text="${appearances}" hidden="true"></span>
 
-
+	<div class="aboutPlayerHeader">
+		<span>PLAYER</span>
+		<hr width= "500px;">
+	</div>
+	
 	<div class="playerTitle">
-		
 		<span class="playerHeader" th:text="${player.firstName} + ' ' + ${player.lastName}"></span>
 		<img id="hair" class="imgHair">
 		<img class="imgBody" alt="/images/1-body.png" src="/images/1-body.png">
-	
-	</div>
-	
-	<div class="playerStats">
-		<table class="playerStatTable">
-	
+		<table class="playerInfoTable">
 			<thead>
 				<tr>
-					<th>Statistics</th>
-				</tr>
-				<tr>
-					<th>ID</th>
-					<th>Goals</th>
+					<th>Full name</th> <th th:text="${player.firstName} + ' ' + ${player.lastName}"></th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				<tr>
-					<th th:text="${player.id}"></th>
-					<th th:text="${player.playerStats.getGoals()}"></th>
+					<th>Player ID</th><th th:text="${player.id}"></th>
 				</tr>
-				
+				<tr>
+					<th>Join Date</th><th th:text="${player.getJoinDate()}"></th>
+				</tr>
+				<tr>
+					<th>Current Power</th><th th:text="${player.getCurrentPower()}"></th>
+				</tr>
+				<tr>
+					<th>Potential Power</th><th th:text="${player.getPotentialPower()}"></th>
+				</tr>
+				<tr>
+					<th>Goals</th><th th:text="${player.playerStats.getGoals()}"></th>
+				</tr>
+				<tr>
+					<th>Appearances</th><th th:text="${player.playerStats.getAppearances()}"></th>
+				</tr>
+				<tr>
+					<th>Goals / Match</th><th th:text="${goalAppearanceAvg}"></th>
+				</tr>
 			</tbody>
-	
-	
 		</table>
+	</div>
+	
+	<div class="playerStats">
 		
 		<div class="plot" id="tester" style=""></div>
-	
+		<div class="plot" id="playerAppearancePlot" style=""></div>
 	</div>
 	
 	<script type="text/javascript" th:inline="javascript">
@@ -104,9 +150,74 @@
 		/*]]>*/
 	</script>
 	
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		var d = {
+			x: /*[[${dates}]]*/,
+			y: /*[[${appearances}]]*/,
+			type: 'bar',
+			title: "Hello",
+			width: 50000000,
+			marker: {
+			    color: 'rgb(158,202,225)',
+			    line: {
+			      color: 'rgb(8,48,107)',
+			      width: 0.5
+			    }
+			  }
+		};
+		
+		var layout = {
+				  title: 'Player Appearances By Date'
+		};
+		plot = document.getElementById('playerAppearancePlot');
+		Plotly.newPlot(plot, [d], layout);
+		/*]]>*/
+	</script>
+	
 	<script type="text/javascript">
 		function init() {document.getElementById("hair").src="/images/" + document.getElementById("span_id").innerHTML + "-hair.png"};
 	  	window.onload = init;
+	</script>
+	
+	<script type="text/javascript">
+		function addSortMethod() {
+			const url = new URL('http://localhost:8080/database');
+			url.searchParams.append("sortBy", "id");
+			
+			window.location = url;
+			
+		}
+	</script>
+	
+	<script type="text/javascript">
+		setInterval(() => {
+			let hrs = document.getElementById('hours');
+			let mins = document.getElementById('minutes');
+			let secs = document.getElementById('seconds');
+			let ampm = document.getElementById('ampm');
+			
+			let h = new Date().getHours();
+			let m = new Date().getMinutes();
+			let s = new Date().getSeconds();
+			let am = h >= 12 ? "PM" : "AM";
+			
+			// convert 24hr clock to 12hr clock
+			if (h > 12) {
+				h = h - 12;
+			}
+			
+			// add zero before single digit number
+			h = (h < 10) ? "0" + h : h;
+			m = (m < 10) ? "0" + m : m;
+			s = (s < 10) ? "0" + s : s;
+			
+			hrs.innerHTML = h;
+			mins.innerHTML = m;
+			seconds.innerHTML = s;
+			ampm.innerHTML = am;
+		})
+	
 	</script>
 	
 </body>

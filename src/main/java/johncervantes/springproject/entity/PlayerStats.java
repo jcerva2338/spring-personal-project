@@ -43,12 +43,22 @@ public class PlayerStats {
 	@Column(name = "goals")
 	private int goals;
 	
+	@Column(name = "appearances")
+	private int appearances;
+	
 	@Column(name = "daily_goal_map_json")
 	private String dailyGoalMapJSON;
+	
+	@Column(name = "daily_appearance_map_json")
+	private String dailyAppearanceMapJSON;
 	
 	@Convert(converter = HashMapConverter.class)
 	@Transient
 	private HashMap<String, Integer> dailyGoalMap;
+	
+	@Convert(converter = HashMapConverter.class)
+	@Transient
+	private HashMap<String, Integer> dailyAppearanceMap;
 	
 	public void serializeDailyGoalMap() throws JsonProcessingException {
 		System.out.println("Doing serialization!");
@@ -64,6 +74,21 @@ public class PlayerStats {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		this.dailyGoalMap = objectMapper.readValue(dailyGoalMapJSON, new TypeReference<HashMap<String, Integer>>() {});
+	}
+	
+	public void serializeDailyAppearanceMap() throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		this.dailyAppearanceMapJSON = objectMapper.writeValueAsString(dailyAppearanceMap);
+	}
+	
+	public void deserializeDailyAppearanceMap() throws IOException {
+		if (dailyAppearanceMapJSON == null) { 
+			this.dailyAppearanceMap = new HashMap<>();
+			return; 
+		}
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		this.dailyAppearanceMap = objectMapper.readValue(dailyAppearanceMapJSON, new TypeReference<HashMap<String, Integer>>() {});
 	}
 	
 	
@@ -112,6 +137,30 @@ public class PlayerStats {
 
 	public void setDailyGoalMapJSON(String dailyGoalMapJSON) {
 		this.dailyGoalMapJSON = dailyGoalMapJSON;
+	}
+
+	public int getAppearances() {
+		return appearances;
+	}
+
+	public void setAppearances(int appearances) {
+		this.appearances = appearances;
+	}
+
+	public String getDailyAppearanceMapJSON() {
+		return dailyAppearanceMapJSON;
+	}
+
+	public void setDailyAppearanceMapJSON(String dailyAppearanceMapJSON) {
+		this.dailyAppearanceMapJSON = dailyAppearanceMapJSON;
+	}
+
+	public HashMap<String, Integer> getDailyAppearanceMap() {
+		return dailyAppearanceMap;
+	}
+
+	public void setDailyAppearanceMap(HashMap<String, Integer> dailyAppearanceMap) {
+		this.dailyAppearanceMap = dailyAppearanceMap;
 	}
 
 	@Override

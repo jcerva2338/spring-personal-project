@@ -25,7 +25,8 @@
 		</div>
 		
 		<div class="teamInfo">
-			<p th:text="'Team // &emsp;' +  ${user.team}  + '&emsp;' + '&emsp;' + '&emsp;' + '&emsp;' + 'Currency // &emsp;' + ${user.currency}" >
+			<span id="teamIcon" th:text=" '&nbsp;' + '&nbsp;' + '&nbsp;' + '&nbsp;' + ${user.team}"></span>
+			<span id="currencyIcon" th:text="'&nbsp;' + '&nbsp;' + '&nbsp;' + '&nbsp;' + ${user.currency}"></span>
 		</div>
 		
 		<div class = "alert" id="error" hidden="true">

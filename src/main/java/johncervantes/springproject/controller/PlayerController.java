@@ -110,11 +110,22 @@ public class PlayerController {
 			final int NUM_HEADS_AVAILABLE = 2;
 			final int NUM_BODYS_AVAILABLE = 1;
 			
+			final int powerLimit = 1000;
+			
 			if (player.getId() == 0) {
 				player.setHead(random.nextInt(1, NUM_HEADS_AVAILABLE+1));
 				player.setBody(random.nextInt(1, NUM_BODYS_AVAILABLE+1));
 				player.setPlayerStats(new PlayerStats(player));
 				player.getPlayerStats().setGoals(0);
+				player.getPlayerStats().setAppearances(0);
+				player.setJoinDate(java.time.LocalDate.now().toString());
+				
+				int curPower = random.nextInt(1, powerLimit+1);
+				int potentialPower = random.nextInt(curPower, powerLimit+1);
+				
+				player.setCurrentPower(curPower);
+				player.setPotentialPower(potentialPower);
+				
 				user.setCurrency(user.getCurrency() - 300);
 				
 				player.setUser(user);
@@ -142,11 +153,15 @@ public class PlayerController {
 	public String aboutPlayer(@RequestParam("playerId") int playerId, Model theModel) {
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
 			Player player = playerRepository.getById(playerId);
 			
 			try {
 				player.getPlayerStats().deserializeDailyGoalMap();
 				player.getPlayerStats().serializeDailyGoalMap();
+				
+				player.getPlayerStats().deserializeDailyAppearanceMap();
+				player.getPlayerStats().serializeDailyAppearanceMap();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("ERROR!");
@@ -165,10 +180,13 @@ public class PlayerController {
 //			
 			System.out.println("In progress!");
 			HashMap<String, Integer> playerStats = player.getPlayerStats().getDailyGoalMap();
+			HashMap<String, Integer> playerAppearances = player.getPlayerStats().getDailyAppearanceMap();
+			
 			Set<String> dateSet = playerStats.keySet();
 			String[] dates = dateSet.toArray(new String[dateSet.size()]);
 			
 			Integer[] goals = (Integer[]) playerStats.values().toArray(new Integer[playerStats.values().size()]);
+			Integer[] appearances = (Integer[]) playerAppearances.values().toArray(new Integer[playerAppearances.values().size()]);
 			
 			for (String s : dates) {
 				System.out.println(s);
@@ -178,10 +196,18 @@ public class PlayerController {
 				System.out.println(i);
 			}
 			
+			for (Integer a: appearances) {
+				System.out.println("APP: " + a);
+			}
+			
 			System.out.println("Completed!");
 			
+			theModel.addAttribute("user", userRepository.getById(details.getId()));
 			theModel.addAttribute("dates", dates);
 			theModel.addAttribute("goals", goals);
+			theModel.addAttribute("appearancesTotal", player.getPlayerStats().getAppearances());
+			theModel.addAttribute("goalAppearanceAvg", (float)player.getPlayerStats().getGoals() / (float)player.getPlayerStats().getAppearances());
+			theModel.addAttribute("appearances", appearances);
 			                
 			theModel.addAttribute("data", player.getPlayerStats().getDailyGoalMapJSON());
 		}

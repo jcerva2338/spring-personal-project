@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.CodePointLength;
+
 @Entity
 @Table(name = "player")
 public class Player {
@@ -40,6 +42,16 @@ public class Player {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "player")
 	private PlayerStats playerStats;
+	
+	@Column(name = "join_date")
+	private String joinDate;
+	
+	@Column(name = "current_power")
+	private int currentPower;
+	
+	@Column(name = "potential_power")
+	private int potentialPower;
+	
 	
 	
 	public Player() {
@@ -114,6 +126,30 @@ public class Player {
 
 	public void setPlayerStats(PlayerStats playerStats) {
 		this.playerStats = playerStats;
+	}
+
+	public String getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public int getCurrentPower() {
+		return currentPower;
+	}
+
+	public void setCurrentPower(int currentPower) {
+		this.currentPower = currentPower;
+	}
+
+	public int getPotentialPower() {
+		return potentialPower;
+	}
+
+	public void setPotentialPower(int potentialPower) {
+		this.potentialPower = potentialPower;
 	}
 
 	@Override

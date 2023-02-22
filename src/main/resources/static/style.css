@@ -154,6 +154,11 @@ th{
 	color: white;
 }
 
+.playerListTable {
+	position: absolute;
+	top: 650px;
+}
+
 .playerListTable td {
 	font-family: 'Allerta Stencil', sans-serif;
 	font-weight: 300;
@@ -162,14 +167,25 @@ th{
 
 #playersTableHeading {
 	color: #2B6EDB;
-	position: fixed;
-	transform: translate(-50%, -50%);
+	position: absolute;
+	
 	font-size: 30px;
 	font-family: 'Allerta Stencil', sans-serif;
-	top: 300px;
+	top: 270px;
+	left: -300px;
+	padding-bottom: 30px;
 	padding-left: 350px;
 	pointer-events: none;
 	text-align: center;
+}
+
+#playerPlotsHeading {
+	position: absolute;
+	font-size: 25px;
+	font-family: 'Allerta Stencil', sans-serif;
+	top: 400px;
+	left: 650px;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .addOptions {
@@ -489,6 +505,26 @@ a {
 	opacity: 0.9;
 }
 
+.aboutPlayerHeader {
+	position: absolute;
+	top: 250px;
+	left: 100px;
+}
+
+.aboutPlayerHeader span {
+	color: #2e79f2;
+	left: 200px;
+	font-size: 30px;
+	font-family: 'Allerta Stencil', sans-serif;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.aboutPlayerHeader hr {
+	background-color: #2e79f2;
+	height: 3px;
+	box-shadow: 5px 1px 1px rgba(0,0,0,0.2);
+}
+
 .playerVisual {
 	position: relative;
 	height: 2000px;
@@ -496,9 +532,8 @@ a {
 }
 
 .playerTitle  {
-	direction: utod;
 	text-align: right;
-	font-size:30px;
+	font-size:3.2vw;
 	position: absolute;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 	
@@ -513,26 +548,51 @@ a {
 	
 	left: 120px;
 	top: 350px;
-	max-width: 500px;
+	max-width: 400px;
 	
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+}
+
+.playerInfoTable {
+	width: inherit;
+	left: 200px;
+	top: 712px;
+	position: relative;
+	border-color: black;
+	border: 0px;
+	text-shadow: none;
+	
+	border-collapse: collapse;
+}
+
+.playerInfoTable tr {
+	border: none;
+}
+.playerInfoTable th {
+	color: black;
+	font-size: 15px;
+	border: none;
+	text-align: left;
+	background: #accbfc 5%;
 }
 
 .playerHeader {
 	position: relative;
 	background: #99c0ff;
-	color: white;
+	color: black;
+	font-size:30px;
 	font-family: 'Allerta Stencil', sans-serif;
 	text-transform: uppercase;
 	
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 	
-	top: -150px;
-	font-size: 45px;
+	top: 10px;
 	width: 100%;
 }
 
@@ -578,9 +638,9 @@ a {
 	align-items: center;
 	justify-content: center;
 	
-	gap: 300px;
-	flex-direction: column;
-	top: 150px;
+	gap: 0px;
+	flex-direction: row;
+	top: 450px;
 	left: 600px;
 }
 
@@ -826,6 +886,9 @@ recap hr {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	
+	border-radius: 10px;
+	box-shadow: 2px 5px 5px rgba(0,0,0,0.5);
 }
 
 .popup {
@@ -835,6 +898,7 @@ recap hr {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 .popupBox {
@@ -848,16 +912,18 @@ recap hr {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
+	box-shadow: 2px 5px 5px rgba(0,0,0,0.5);
 }
 
 .popupBox span {
 	font-family: 'Anton', sans-serif;
 	text-align: center;
 	font-size: 2.1em;
-	color:white;
+	color: #2660bf;
 	font-weight: 500;
 	
-	-webkit-text-stroke: 1.5px #537EBA;
+	-webkit-text-stroke: 1.0px white;
 	transition: 1.0s;
 }
 
@@ -876,6 +942,8 @@ recap hr {
 	border-radius: 70px;
 	border: 3px solid #537EBA;
 	z-index: -2;
+	
+	box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
 	transition: transform 0.5s, width 0.5s, height 0.5s;
 
 	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -897,6 +965,8 @@ recap hr {
 
 	transform: translateX(450px);
 	transition-delay: 0s, 0.5s, 0.5s;
+	
+	box-shadow: 2px 5px 5px rgba(0,0,0,0.5);
 }
 
 .news-description.active {
