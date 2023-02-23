@@ -42,7 +42,14 @@ public class DatabaseController {
 			List<User> users = userRepository.findAll();
 			theModel.addAttribute("users", users);
 			
-			List<Player> players = playerRepository.findAll(Sort.by(sortBy));
+			List<Player> players;
+			
+			if (sortBy.equals("currentPower") || sortBy.equals("potentialPower")) {
+				players = playerRepository.findAll(Sort.by(sortBy).descending());
+			}
+			else { 
+				players = playerRepository.findAll(Sort.by(sortBy));
+			}
 			theModel.addAttribute("players", players);
 		
 		}

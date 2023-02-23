@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,6 +56,23 @@ public class PlayerController {
 		
 			theModel.addAttribute("user", userRepository.getById(details.getId()));
 			theModel.addAttribute("players", players);
+			
+			List<Player> sortedPlayers = playerRepository.findAll(Sort.by("currentPower"));
+			System.out.println("Size: " + sortedPlayers.size());
+			int topThreePowerSum;
+			
+			if (sortedPlayers == null || sortedPlayers.size() < 3) {
+				topThreePowerSum = 0;
+			}
+			else {
+			 topThreePowerSum = sortedPlayers.get(0).getCurrentPower()
+					+ sortedPlayers.get(1).getCurrentPower()  
+					+ sortedPlayers.get(2).getCurrentPower();
+			}
+			
+			theModel.addAttribute("topPower", topThreePowerSum);
+			
+			
 		}
 		
 		return "players";

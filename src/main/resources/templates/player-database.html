@@ -78,6 +78,8 @@
 			<tr>
 				<td onclick="addSortMethod('id')" class="table-col">ID</td>
 				<th>Team</th>
+				<td onclick="addSortMethod('currentPower')" class="table-col">Current Power</td>
+				<td onclick="addSortMethod('potentialPower')" class="table-col">Potential Power</td>
 				<td onclick="addSortMethod('firstName')" class="table-col">First Name</td>
 				<td onclick="addSortMethod('lastName')" class="table-col">Last Name</td>
 			</tr>
@@ -88,6 +90,8 @@
 			<tr th:each="tempPlayer : ${players}">
 				<td th:text="${tempPlayer.id}"/>
 				<td th:text="${tempPlayer.user.getTeam()}"/>
+				<td th:text="${tempPlayer.currentPower}"/>
+				<td th:text="${tempPlayer.potentialPower}"/>
 				<td th:text="${tempPlayer.firstName}"/>
 				<td th:text="${tempPlayer.lastName}"/>
 			</tr>

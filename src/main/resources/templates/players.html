@@ -80,6 +80,12 @@
 	<span id="currency" th:text="${user.getCurrency()}" hidden="true"></span>
 	<span id="numPlayers" th:text="${players.size()}" hidden="true"></span>
 	
+	<div class="powerIndicator">
+		<span id="powerValue" th:text="${topPower}"></span>
+		<span id="powerText">Cumulative Top 3 Power</span>
+		<i></i>
+	</div>
+	
 	<span id="playersTableHeading">Players</span>
 	
 	<div class="addOptions">
@@ -92,6 +98,7 @@
 		<thead>
 			<tr>
 				<th>ID</th>
+				<th>Power</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Action</th>
@@ -102,6 +109,7 @@
 		
 			<tr th:each="tempPlayer : ${players}">
 				<td th:text="${tempPlayer.id}"/>
+				<td th:text="${tempPlayer.currentPower}"/>
 				<td th:text="${tempPlayer.firstName}"/>
 				<td th:text="${tempPlayer.lastName}"/>
 			
